@@ -1,137 +1,192 @@
 import { Badge } from '@/components/ui/badge';
-import { BookOpen, Mic, GraduationCap, Heart, Star, Clock, UserPlus, CheckCircle } from 'lucide-react';
+import { BookOpen, GraduationCap, Star, CheckCircle, ArrowRight, Sparkles, BookCheck, Languages } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Button } from '@/components/ui/button';
 
-const mainFeatures = [
+const programs = [
   {
-    icon: GraduationCap,
-    title: 'Expert Tutors',
-    description: 'Learn from highly qualified and Ijazah-certified Quran teachers with years of experience.'
+    title: 'Noorani Qaida',
+    subtitle: 'Foundation Course',
+    description: 'Perfect for beginners. Master the Arabic alphabet and basic pronunciation rules in a fun, engaging way.',
+    features: ['Letter Recognition', 'Basic Makharij', 'Short Vowels/Harakat', 'Connective Reading'],
+    icon: Languages,
+    color: 'emerald'
   },
   {
-    icon: Clock,
-    title: '24/7 Schedule',
-    description: 'We offer flexible timing that fits your busy lifestyle, regardless of your time zone.'
-  },
-  {
-    icon: Star,
-    title: 'Tajweed Mastery',
-    description: 'Our courses focus on proper pronunciation (Makhaarij) and recitation rules.'
-  },
-  {
-    icon: Heart,
-    title: '1-on-1 Attention',
-    description: 'Personalized lessons tailored to each student speed and learning style.'
-  },
-  {
+    title: 'Quran Reading',
+    subtitle: 'Nazra Mastery',
+    description: 'Develop fluency in reading the Holy Quran with correct Tajweed rules and beautiful rhythm.',
+    features: ['Fluency Building', 'Tajweed Rules', 'Stop Symbols (Waqf)', 'Daily Recitation Practice'],
     icon: BookOpen,
-    title: 'Structured Hifz',
-    description: 'Dedicated revision systems to help you memorize and retain the Holy Quran.'
+    color: 'gold',
+    popular: true
   },
   {
-    icon: CheckCircle,
-    title: 'Safe Environment',
-    description: 'A secure, parent-monitored online platform for children and adults alike.'
+    title: 'Memorization',
+    subtitle: 'Hifz Program',
+    description: 'A structured approach to help you or your child memorize the Quran with a long-term retention system.',
+    features: ['Juz Amma focus', 'Revision Systems', 'Individual Pace', 'Mental Discipline'],
+    icon: Star,
+    color: 'emerald'
   },
+  {
+    title: 'Islamic Studies',
+    subtitle: 'Character Building',
+    description: 'Essential Islamic knowledge, Duas, and character development based on Prophetic teachings.',
+    features: ['Daily Adhkar', 'Basic Fiqh', 'Prophetic Stories', 'Islamic Manners (Adab)'],
+    icon: GraduationCap,
+    color: 'gold'
+  }
 ];
 
 const steps = [
   {
     id: 1,
-    title: 'Register Free Trial',
-    description: 'Fill out the simple form and book your first 1-on-1 session with our experts.',
-    icon: UserPlus
+    title: 'Free Assessment',
+    description: 'Our senior scholars will evaluate your level and recommend the best path.',
+    icon: BookCheck
   },
   {
     id: 2,
-    title: 'Select Your Plan',
-    description: 'Choose from our economical monthly or hourly plans that suit your requirements.',
-    icon: BookOpen
+    title: 'Select Schedule',
+    description: 'Choose timings that work for you. We adapt to your time zone 24/7.',
+    icon: Star
   },
   {
     id: 3,
-    title: 'Start Learning',
-    description: 'Begin your spiritual journey of understanding the Quran from the comfort of home.',
-    icon: GraduationCap
+    title: 'Begin Learning',
+    description: 'Enter your secure virtual classroom and start your spiritual journey.',
+    icon: Sparkles
   }
 ];
 
 export function Features() {
   return (
-    <section id="features" className="py-24 bg-white relative overflow-hidden">
-      {/* Decorative Mosaic Background */}
-      <div className="absolute inset-0 bg-islamic-pattern opacity-5" />
+    <section id="features" className="py-32 bg-[#fcfaf7] relative overflow-hidden">
+      {/* Decorative Mosque Silhouette Overlay (Subtle) */}
+      <div className="absolute inset-0 bg-islamic-pattern opacity-[0.03] pointer-events-none" />
 
       <div className="container mx-auto px-4 relative z-10">
 
-        {/* Why Study With Us Section */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <Badge className="bg-emerald-50 text-emerald-700 border-emerald-100 mb-4 px-4 py-1.5 font-bold">
-            Why Tahir Academy?
-          </Badge>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-800 mb-6 tracking-tight">
-            Why Study With Us?
-          </h2>
-          <div className="w-24 h-1.5 bg-gold-primary mx-auto mb-6 rounded-full" />
-          <p className="text-lg text-slate-600 font-medium">
-            We provide a world-class platform for Quranic education, combining ancient wisdom with modern technology.
-          </p>
+        {/* Section Header */}
+        <div className="text-center max-w-4xl mx-auto mb-24">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <Badge className="bg-emerald-100 text-emerald-800 border-none mb-6 px-6 py-2 font-black uppercase tracking-widest text-[10px]">
+              Our Professional Programs
+            </Badge>
+            <h2 className="text-4xl lg:text-7xl font-black text-slate-900 mb-8 tracking-tighter">
+              A Plan For <span className="gradient-text-emerald">Every Student</span>
+            </h2>
+            <p className="text-xl text-slate-500 font-bold max-w-2xl mx-auto leading-relaxed">
+              Tailored learning paths designed by world-class educators to ensure effective results for all ages.
+            </p>
+          </motion.div>
         </div>
 
-        {/* Feature Grid with Octagonal Icons */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
-          {mainFeatures.map((feature, idx) => (
-            <div
+        {/* Programs Grid - Mihrab Top Arches */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-32">
+          {programs.map((program, idx) => (
+            <motion.div
               key={idx}
-              className="group p-10 bg-[#fcfaf7] border border-slate-100 rounded-3xl shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1 }}
+              className="relative group"
             >
-              <div className="flex flex-col items-center text-center">
-                <div className="w-20 h-20 mb-8 flex items-center justify-center bg-emerald-600 octagonal-shape text-white transform group-hover:rotate-12 transition-transform duration-500 shadow-xl shadow-emerald-500/20">
-                  <feature.icon className="w-10 h-10" />
+              {program.popular && (
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20">
+                  <Badge className="bg-gold-primary text-white border-4 border-[#fcfaf7] px-4 py-1 text-[10px] font-black uppercase tracking-wider shadow-lg">
+                    Most Popular
+                  </Badge>
                 </div>
-                <h3 className="text-2xl font-bold text-slate-800 mb-4 tracking-tight">{feature.title}</h3>
-                <p className="text-slate-500 leading-relaxed text-sm font-medium">
-                  {feature.description}
+              )}
+
+              <div className="relative bg-white pt-10 pb-12 px-8 rounded-b-[2.5rem] islam-arched-full border border-slate-100 shadow-sm group-hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex flex-col h-full">
+                {/* Header Arch Style */}
+                <div className="absolute top-0 inset-x-0 h-4 bg-gradient-to-r from-emerald-500/10 via-gold-primary/10 to-emerald-500/10 rounded-t-full" />
+
+                <div className="text-center mb-8">
+                  <div className={`w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-2xl ${program.color === 'emerald' ? 'bg-emerald-50 text-emerald-600' : 'bg-orange-50 text-gold-primary'} group-hover:scale-110 transition-transform`}>
+                    <program.icon className="w-8 h-8" />
+                  </div>
+                  <h3 className="text-2xl font-black text-slate-800 mb-2">{program.title}</h3>
+                  <div className={`text-[10px] font-black uppercase tracking-widest ${program.color === 'emerald' ? 'text-emerald-500' : 'text-gold-primary'}`}>
+                    {program.subtitle}
+                  </div>
+                </div>
+
+                <p className="text-slate-500 leading-relaxed text-sm font-bold text-center mb-8">
+                  {program.description}
                 </p>
+
+                <div className="space-y-4 mb-10">
+                  {program.features.map((feat, fIdx) => (
+                    <div key={fIdx} className="flex items-center gap-3">
+                      <div className="w-5 h-5 rounded-full bg-emerald-50 flex items-center justify-center border border-emerald-100 flex-shrink-0">
+                        <CheckCircle className="w-3 h-3 text-emerald-600" />
+                      </div>
+                      <span className="text-xs font-bold text-slate-600">{feat}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <Button className="mt-auto w-full group-hover:bg-islamic-green-main transition-colors font-black h-12 rounded-xl" variant="outline">
+                  Learn More <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Button>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
-        {/* 3 Steps Section */}
-        <div className="bg-emerald-900 rounded-[3.5rem] p-12 lg:p-24 relative overflow-hidden shadow-2xl">
-          <div className="absolute inset-0 bg-islamic-pattern opacity-5" />
+        {/* The 3-Step Journey Redesigned */}
+        <div className="relative pt-24 pb-20 px-8 lg:px-20 bg-islamic-green-dark rounded-[4rem] overflow-hidden shadow-2xl border border-white/5">
+          <div className="absolute inset-0 bg-islamic-pattern opacity-[0.05] pointer-events-none" />
 
           <div className="relative z-10">
-            <div className="text-center mb-20">
-              <h2 className="text-4xl sm:text-5xl font-black text-white mb-6">
-                3 Steps to Start Your <span className="text-gold-accent">Spiritual Journey</span>
+            <div className="text-center mb-24">
+              <Badge className="bg-white/10 text-white/60 mb-6 px-4 py-1.5 font-black uppercase tracking-[0.2em] text-[10px] border border-white/10">
+                Smooth Professional Process
+              </Badge>
+              <h2 className="text-4xl lg:text-6xl font-black text-white tracking-tighter">
+                3 Steps to <span className="text-gold-accent">Excellence</span>
               </h2>
-              <p className="text-emerald-100/60 max-w-2xl mx-auto text-lg font-medium">
-                Getting started is easy. Follow these simple steps to begin your journey with our expert tutors.
-              </p>
             </div>
 
-            <div className="grid lg:grid-cols-3 gap-16">
-              {steps.map((step) => (
-                <div key={step.id} className="relative group">
-                  {/* Connector Line (Desktop) */}
+            <div className="grid lg:grid-cols-3 gap-20">
+              {steps.map((step, idx) => (
+                <motion.div
+                  key={step.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.2 }}
+                  className="relative flex flex-col items-center text-center group"
+                >
+                  {/* Connector - Enhanced */}
                   {step.id < 3 && (
-                    <div className="hidden lg:block absolute top-12 left-full w-full h-[3px] bg-gradient-to-r from-gold-primary/50 to-transparent z-0 ml-8" />
+                    <div className="hidden lg:block absolute top-12 left-[80%] w-[40%] h-0.5 border-t border-dashed border-white/20 z-0" />
                   )}
 
-                  <div className="flex flex-col items-center text-center relative z-10">
-                    <div className="w-24 h-24 bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl flex items-center justify-center mb-8 group-hover:bg-gold-primary group-hover:border-gold-primary transition-all duration-500 transform group-hover:scale-110 group-hover:-rotate-3 shadow-2xl">
-                      <step.icon className="w-12 h-12 text-gold-accent group-hover:text-white" />
-                      <div className="absolute -top-3 -right-3 w-10 h-10 bg-gold-primary text-white rounded-xl flex items-center justify-center font-black border-4 border-emerald-900 shadow-xl">
+                  <div className="w-24 h-24 relative mb-10">
+                    <div className="absolute inset-0 bg-gold-primary/20 blur-2xl rounded-full scale-0 group-hover:scale-150 transition-transform duration-700" />
+                    <div className="relative w-full h-full bg-white/5 backdrop-blur-xl border border-white/20 rounded-[2rem] flex items-center justify-center group-hover:bg-gold-primary group-hover:border-gold-primary transition-all duration-500 transform group-hover:-rotate-6">
+                      <step.icon className="w-10 h-10 text-gold-accent group-hover:text-white" />
+                      <div className="absolute -bottom-3 -right-3 w-10 h-10 bg-white text-emerald-900 rounded-full flex items-center justify-center font-black text-xl shadow-xl border-4 border-emerald-950">
                         {step.id}
                       </div>
                     </div>
-                    <h3 className="text-2xl font-bold text-white mb-4 tracking-tight">{step.title}</h3>
-                    <p className="text-emerald-100/60 text-base leading-relaxed font-medium">
-                      {step.description}
-                    </p>
                   </div>
-                </div>
+
+                  <h3 className="text-2xl font-black text-white mb-4">{step.title}</h3>
+                  <p className="text-white/50 text-sm font-bold leading-relaxed max-w-xs">
+                    {step.description}
+                  </p>
+                </motion.div>
               ))}
             </div>
           </div>
