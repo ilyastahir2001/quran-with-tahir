@@ -135,6 +135,14 @@ const HolyQuran = () => {
         if (viewport) viewport.scrollTop = 0;
     }, [selectedSurah.id, viewMode, currentPage, showWordByWord]);
 
+    // SEO: Set Page Title
+    useEffect(() => {
+        document.title = "Read Quran Online - Quran With Tahir";
+        return () => {
+            document.title = "Quran With Tahir";
+        };
+    }, []);
+
     // Global search and Jump to Ayah
     const handleSearch = (query: string) => {
         setSearchQuery(query);
@@ -647,7 +655,8 @@ const HolyQuran = () => {
                                                     <span className={cn(
                                                         "h-10 w-10 rounded-xl flex items-center justify-center font-black text-sm",
                                                         selectedSurah.id === surah.id ? "bg-white/20" : "bg-primary/10 text-primary"
-                                                    )}>
+                                                    )}
+                                                    >
                                                         {surah.id}
                                                     </span>
                                                     <div className="text-left">

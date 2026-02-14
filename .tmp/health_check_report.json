@@ -1,0 +1,17 @@
+{
+  "status": "pass",
+  "timestamp": "2026-02-14T04:37:45.761815Z",
+  "checks": [
+    {
+      "name": "environment_variables",
+      "status": "pass",
+      "details": ""
+    },
+    {
+      "name": "tmp_directory_writable",
+      "status": "pass",
+      "details": ".tmp directory is writable"
+    }
+  ],
+  "message": "All system health checks passed."
+}

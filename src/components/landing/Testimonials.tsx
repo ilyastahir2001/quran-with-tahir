@@ -1,139 +1,132 @@
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
-import { Star, Quote, MapPin } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Star as StarIcon, Quote as QuoteIcon, MapPin as MapPinIcon, ShieldCheck } from 'lucide-react';
 
 const testimonials = [
   {
-    name: 'Sarah Ahmed',
-    location: 'California, USA',
-    avatar: 'SA',
-    rating: 5,
-    text: "Alhamdulillah, my daughter has memorized 5 Juz in just 8 months! The teachers are incredibly patient and use engaging methods. I can monitor her progress through the parent dashboard which gives me complete peace of mind.",
-    highlight: '5 Juz memorized in 8 months',
+    name: "Ayesha Khan",
+    location: "London, UK",
+    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&crop=faces",
+    text: "The dedication of the tutors is unmatched. My son Yusuf has improved his Tajweed significantly in just 3 months. The online platform is so easy to use.",
+    role: "Parent of Yusuf (Age 9)",
+    rating: 5
   },
   {
-    name: 'Mohammed Khan',
-    location: 'London, UK',
-    avatar: 'MK',
-    rating: 5,
-    text: "Finding a qualified Quran teacher in the UK was challenging until we found Quran With Tahir. The flexible scheduling works perfectly with our busy lifestyle, and our son looks forward to every class!",
-    highlight: 'Perfect for busy families',
+    name: "Mohammed Ali",
+    location: "New York, USA",
+    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop&crop=faces",
+    text: "I was hesitant about online Quran classes, but Quran With Tahir changed my perspective. The flexibility and quality of instruction are world-class.",
+    role: "Adult Learner",
+    rating: 5
   },
   {
-    name: 'Fatima Hassan',
-    location: 'Sydney, Australia',
-    avatar: 'FH',
-    rating: 5,
-    text: "The female teachers are excellent mashAllah. My daughters feel comfortable and have developed a beautiful recitation. The academy truly understands the needs of Muslim families in the West.",
-    highlight: 'Female teachers available',
-  },
-  {
-    name: 'Ahmed Ali',
-    location: 'Toronto, Canada',
-    avatar: 'AA',
-    rating: 5,
-    text: "As a parent, the recorded sessions feature is invaluable. I can review my child's classes and see exactly how they're progressing. The Tajweed course has transformed my son's recitation.",
-    highlight: 'Class recordings for parents',
-  },
-  {
-    name: 'Aisha Malik',
-    location: 'Berlin, Germany',
-    avatar: 'AM',
-    rating: 5,
-    text: "We tried several online academies before, but Quran With Tahir stands out. The teachers actually care about our children's progress. My kids went from struggling to reading fluently in months!",
-    highlight: 'From struggling to fluent',
-  },
-  {
-    name: 'Yusuf Rahman',
-    location: 'Dubai, UAE',
-    avatar: 'YR',
-    rating: 5,
-    text: "The Ijazah program is exceptional. My son received his Ijazah with a complete Sanad. The quality of instruction matches the best traditional madrasas, but with the convenience of learning from home.",
-    highlight: 'Authentic Ijazah certification',
-  },
+    name: "Fatima Ahmed",
+    location: "Toronto, Canada",
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&h=100&fit=crop&crop=faces",
+    text: "Highly recommended for female students looking for a safe and professional environment. My daughter loves her teacher.",
+    role: "Mother of Sarah",
+    rating: 5
+  }
 ];
 
 export function Testimonials() {
   return (
-    <section id="testimonials" className="py-24 bg-background">
-      <div className="container mx-auto px-4">
+    <section id="testimonials" className="py-24 bg-[hsl(40,30%,98%)] relative overflow-hidden">
+      {/* Decorative Elements */}
+      <div className="absolute top-0 left-0 w-64 h-64 bg-emerald-100 rounded-full blur-[100px] opacity-60" />
+      <div className="absolute bottom-0 right-0 w-64 h-64 bg-gold-accent/20 rounded-full blur-[100px] opacity-60" />
+      <div className="absolute inset-0 bg-islamic-pattern opacity-[0.03] pointer-events-none" />
+
+      <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <Badge className="bg-emerald-100 text-emerald-700 hover:bg-emerald-100 mb-4">
-            Testimonials
+        <div className="text-center max-w-4xl mx-auto mb-20">
+          <Badge className="bg-emerald-100 text-emerald-800 border-none mb-4 px-6 py-2 font-black uppercase tracking-widest text-[10px]">
+            Success Stories
           </Badge>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            Hear from{' '}
-            <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-              Happy Parents
-            </span>
+          <h2 className="text-4xl lg:text-6xl font-black text-emerald-950 mb-6 tracking-tight">
+            Loved By Families <span className="text-emerald-600">Worldwide</span>
           </h2>
-          <p className="text-lg text-muted-foreground">
-            Join thousands of satisfied families who have transformed their children's 
-            Quran learning journey with us.
+          <p className="text-xl text-stone-600 font-bold max-w-2xl mx-auto leading-relaxed">
+            Join thousands of satisfied students who have transformed their relationship with the Quran.
           </p>
         </div>
 
         {/* Testimonials Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {testimonials.map((testimonial, index) => (
-            <Card
-              key={index}
-              className="relative overflow-hidden border-2 hover:border-emerald-200 hover:shadow-xl transition-all duration-300"
+        <div className="grid md:grid-cols-3 gap-8 mb-20">
+          {testimonials.map((testimonial, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.2 }}
             >
-              <CardContent className="p-6">
-                {/* Quote Icon */}
-                <Quote className="w-10 h-10 text-emerald-100 absolute top-4 right-4" />
-                
-                {/* Rating */}
-                <div className="flex gap-1 mb-4">
-                  {Array.from({ length: testimonial.rating }).map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-amber-400 fill-amber-400" />
-                  ))}
-                </div>
+              <Card className="h-full border-0 shadow-lg bg-white relative overflow-hidden group hover:-translate-y-2 transition-transform duration-300">
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 to-emerald-600" />
+                <CardContent className="p-8 pt-10 flex flex-col h-full relative">
+                  <QuoteIcon className="absolute top-6 right-6 w-10 h-10 text-emerald-50 pointer-events-none group-hover:text-emerald-100 transition-colors" />
 
-                {/* Testimonial Text */}
-                <p className="text-muted-foreground mb-4 relative z-10">
-                  "{testimonial.text}"
-                </p>
-
-                {/* Highlight Badge */}
-                <div className="mb-4">
-                  <Badge variant="secondary" className="bg-emerald-50 text-emerald-700">
-                    {testimonial.highlight}
-                  </Badge>
-                </div>
-
-                {/* Author */}
-                <div className="flex items-center gap-3 pt-4 border-t">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white font-semibold">
-                    {testimonial.avatar}
-                  </div>
-                  <div>
-                    <h4 className="font-semibold">{testimonial.name}</h4>
-                    <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                      <MapPin className="w-3 h-3" />
-                      {testimonial.location}
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-14 h-14 rounded-full border-2 border-emerald-100 p-1 flex-shrink-0">
+                      <img
+                        src={testimonial.image}
+                        alt={testimonial.name}
+                        className="w-full h-full object-cover rounded-full"
+                      />
+                    </div>
+                    <div>
+                      <div className="font-black text-slate-800">{testimonial.name}</div>
+                      <div className="flex items-center gap-1 text-xs font-bold text-stone-400">
+                        <MapPinIcon className="w-3 h-3" /> {testimonial.location}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
+
+                  <div className="flex mb-4 text-gold-accent">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <StarIcon key={i} className="w-4 h-4 fill-current" />
+                    ))}
+                  </div>
+
+                  <p className="text-stone-600 font-medium leading-relaxed italic mb-6 flex-grow">
+                    "{testimonial.text}"
+                  </p>
+
+                  <div className="pt-6 border-t border-slate-50">
+                    <div className="text-xs font-black uppercase tracking-wider text-emerald-600">
+                      {testimonial.role}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </div>
 
-        {/* Video Testimonial CTA */}
-        <div className="mt-16 text-center">
-          <p className="text-muted-foreground mb-4">
-            Want to hear more? Watch video testimonials from our students and parents.
-          </p>
-          <div className="inline-flex items-center gap-2 text-emerald-600 font-medium">
-            <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center">
-              <div className="w-0 h-0 border-l-[8px] border-l-emerald-600 border-y-[5px] border-y-transparent ml-0.5" />
+        {/* Trust Banner using Glassmorphism */}
+        <div className="max-w-4xl mx-auto bg-white/80 backdrop-blur-lg rounded-2xl p-8 border border-emerald-100 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+          <div>
+            <div className="text-xl font-black text-emerald-950 mb-1">Still not sure?</div>
+            <p className="text-stone-500 text-sm font-bold">Read verified reviews on our social platforms.</p>
+          </div>
+
+          <div className="flex items-center gap-4 bg-emerald-50 px-6 py-3 rounded-xl border border-emerald-100">
+            <ShieldCheck className="w-6 h-6 text-emerald-600" />
+            <div className="flex flex-col">
+              <span className="text-xs font-bold text-emerald-800 uppercase tracking-wider">Top Rated On</span>
+              <span className="text-lg font-black text-emerald-900 leading-none">TrustPilot</span>
             </div>
-            <span>Watch Success Stories</span>
+            <div className="flex items-center gap-0.5 ml-2 text-gold-accent">
+              <StarIcon className="w-4 h-4 fill-current" />
+              <StarIcon className="w-4 h-4 fill-current" />
+              <StarIcon className="w-4 h-4 fill-current" />
+              <StarIcon className="w-4 h-4 fill-current" />
+              <StarIcon className="w-4 h-4 fill-current" />
+            </div>
           </div>
         </div>
+
       </div>
     </section>
   );

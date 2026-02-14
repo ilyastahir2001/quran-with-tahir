@@ -1,169 +1,197 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { BookOpen, Languages, Moon, Mic, GraduationCap, Heart, Star, Clock } from 'lucide-react';
+import { BookOpen, GraduationCap, Star, CheckCircle, ArrowRight, Sparkles, BookCheck, Languages } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Button } from '@/components/ui/button';
 
-const courses = [
+const programs = [
   {
-    icon: BookOpen,
-    title: 'Quran Reading (Nazra)',
-    description: 'Learn to read the Holy Quran with proper Makharij and basic Tajweed rules. Perfect for beginners of all ages.',
-    badge: 'Most Popular',
-    color: 'emerald',
-    features: ['Arabic Alphabet', 'Word Formation', 'Basic Reading'],
-  },
-  {
-    icon: Mic,
-    title: 'Tajweed Course',
-    description: 'Master the art of Quran recitation with proper Tajweed rules, pronunciation, and melodious recitation.',
-    badge: 'Advanced',
-    color: 'blue',
-    features: ['Pronunciation Rules', 'Makhaarij', 'Beautiful Recitation'],
-  },
-  {
-    icon: Heart,
-    title: 'Quran Memorization (Hifz)',
-    description: 'Structured memorization program with revision techniques to help students become Hafiz-e-Quran.',
-    badge: 'Specialized',
-    color: 'purple',
-    features: ['Daily Memorization', 'Revision System', 'Progress Tracking'],
-  },
-  {
+    title: 'Noorani Qaida',
+    subtitle: 'Foundation Course',
+    description: 'Perfect for beginners. Master the Arabic alphabet and basic pronunciation rules in a fun, engaging way.',
+    features: ['Letter Recognition', 'Basic Makharij', 'Short Vowels/Harakat', 'Connective Reading'],
     icon: Languages,
-    title: 'Arabic Language',
-    description: 'Understand the Quran in its original language. Learn Quranic Arabic vocabulary and grammar.',
-    badge: 'Essential',
-    color: 'amber',
-    features: ['Vocabulary', 'Grammar', 'Translation'],
+    color: 'emerald'
   },
   {
-    icon: Moon,
+    title: 'Quran Reading',
+    subtitle: 'Nazra Mastery',
+    description: 'Develop fluency in reading the Holy Quran with correct Tajweed rules and beautiful rhythm.',
+    features: ['Fluency Building', 'Tajweed Rules', 'Stop Symbols (Waqf)', 'Daily Recitation Practice'],
+    icon: BookOpen,
+    color: 'gold',
+    popular: true
+  },
+  {
+    title: 'Memorization',
+    subtitle: 'Hifz Program',
+    description: 'A structured approach to help you or your child memorize the Quran with a long-term retention system.',
+    features: ['Juz Amma focus', 'Revision Systems', 'Individual Pace', 'Mental Discipline'],
+    icon: Star,
+    color: 'emerald'
+  },
+  {
     title: 'Islamic Studies',
-    description: 'Comprehensive Islamic education including Fiqh, Hadith, Seerah, and daily Duas for children.',
-    badge: 'Complete',
-    color: 'teal',
-    features: ['Fiqh Basics', 'Daily Duas', 'Islamic History'],
-  },
-  {
+    subtitle: 'Character Building',
+    description: 'Essential Islamic knowledge, Duas, and character development based on Prophetic teachings.',
+    features: ['Daily Adhkar', 'Basic Fiqh', 'Prophetic Stories', 'Islamic Manners (Adab)'],
     icon: GraduationCap,
-    title: 'Ijazah Program',
-    description: 'Get certified in Quran recitation with an authentic chain of narration (Sanad) to the Prophet ﷺ.',
-    badge: 'Certification',
-    color: 'rose',
-    features: ['Authentic Sanad', 'Full Quran Recitation', 'Official Certificate'],
-  },
+    color: 'gold'
+  }
 ];
 
-const colorClasses = {
-  emerald: 'bg-emerald-100 text-emerald-600 group-hover:bg-emerald-500',
-  blue: 'bg-blue-100 text-blue-600 group-hover:bg-blue-500',
-  purple: 'bg-purple-100 text-purple-600 group-hover:bg-purple-500',
-  amber: 'bg-amber-100 text-amber-600 group-hover:bg-amber-500',
-  teal: 'bg-teal-100 text-teal-600 group-hover:bg-teal-500',
-  rose: 'bg-rose-100 text-rose-600 group-hover:bg-rose-500',
-};
-
-const badgeClasses = {
-  emerald: 'bg-emerald-100 text-emerald-700',
-  blue: 'bg-blue-100 text-blue-700',
-  purple: 'bg-purple-100 text-purple-700',
-  amber: 'bg-amber-100 text-amber-700',
-  teal: 'bg-teal-100 text-teal-700',
-  rose: 'bg-rose-100 text-rose-700',
-};
+const steps = [
+  {
+    id: 1,
+    title: 'Free Assessment',
+    description: 'Our senior scholars will evaluate your level and recommend the best path.',
+    icon: BookCheck
+  },
+  {
+    id: 2,
+    title: 'Select Schedule',
+    description: 'Choose timings that work for you. We adapt to your time zone 24/7.',
+    icon: Star
+  },
+  {
+    id: 3,
+    title: 'Begin Learning',
+    description: 'Enter your secure virtual classroom and start your spiritual journey.',
+    icon: Sparkles
+  }
+];
 
 export function Features() {
   return (
-    <section id="features" className="py-24 bg-gradient-to-b from-background to-muted/30">
-      <div className="container mx-auto px-4">
+    <section id="features" className="py-32 bg-[hsl(35,30%,96%)] relative overflow-hidden">
+      {/* Decorative Mosque Silhouette Overlay (Subtle) */}
+      <div className="absolute inset-0 bg-islamic-pattern opacity-[0.03] pointer-events-none" />
+
+      <div className="container mx-auto px-4 relative z-10">
+
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <Badge className="bg-emerald-100 text-emerald-700 hover:bg-emerald-100 mb-4">
-            Our Programs
-          </Badge>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            Comprehensive Quran Education for{' '}
-            <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-              Every Age
-            </span>
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            From learning the Arabic alphabet to becoming a Hafiz, we offer structured courses 
-            designed by scholars to make Quran learning effective and enjoyable.
-          </p>
+        <div className="text-center max-w-4xl mx-auto mb-24">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <Badge className="bg-emerald-100/50 text-emerald-800 border-emerald-200 mb-6 px-6 py-2 font-black uppercase tracking-widest text-[10px]">
+              Our Professional Programs
+            </Badge>
+            <h2 className="text-4xl lg:text-7xl font-black text-emerald-950 mb-8 tracking-tighter">
+              A Plan For <span className="text-emerald-600">Every Student</span>
+            </h2>
+            <p className="text-xl text-stone-600 font-bold max-w-2xl mx-auto leading-relaxed">
+              Tailored learning paths designed by world-class educators to ensure effective results for all ages.
+            </p>
+          </motion.div>
         </div>
 
-        {/* Course Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {courses.map((course) => (
-            <Card
-              key={course.title}
-              className="group relative overflow-hidden border-2 hover:border-emerald-200 hover:shadow-xl transition-all duration-300 cursor-pointer"
+        {/* Programs Grid - Mihrab Top Arches */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-32">
+          {programs.map((program, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1 }}
+              className="relative group h-full"
             >
-              <CardHeader className="pb-4">
-                <div className="flex items-start justify-between mb-4">
-                  <div
-                    className={`w-14 h-14 rounded-2xl ${colorClasses[course.color as keyof typeof colorClasses]} flex items-center justify-center transition-colors duration-300 group-hover:text-white`}
-                  >
-                    <course.icon className="w-7 h-7" />
-                  </div>
-                  <Badge className={badgeClasses[course.color as keyof typeof badgeClasses]}>
-                    {course.badge}
+              {program.popular && (
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20 w-max">
+                  <Badge className="bg-gold-accent text-emerald-950 border-4 border-[hsl(35,30%,96%)] px-4 py-1 text-[10px] font-black uppercase tracking-wider shadow-lg">
+                    Most Popular
                   </Badge>
                 </div>
-                <CardTitle className="text-xl group-hover:text-emerald-600 transition-colors">
-                  {course.title}
-                </CardTitle>
-                <CardDescription className="text-base">{course.description}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap gap-2">
-                  {course.features.map((feature) => (
-                    <span
-                      key={feature}
-                      className="text-xs px-3 py-1 bg-muted rounded-full text-muted-foreground"
-                    >
-                      {feature}
-                    </span>
+              )}
+
+              <div className="relative bg-white pt-8 pb-10 px-8 rounded-3xl border border-slate-100 shadow-sm group-hover:shadow-xl hover:border-emerald-200 transition-all duration-500 hover:-translate-y-1 flex flex-col h-full">
+
+                {/* Standard Card Header */}
+
+                <div className="text-center mb-8">
+                  <div className={`w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-2xl ${program.color === 'emerald' ? 'bg-emerald-50 text-emerald-600' : 'bg-amber-50 text-gold-accent'} group-hover:scale-110 transition-transform`}>
+                    <program.icon className="w-8 h-8" />
+                  </div>
+                  <h3 className="text-2xl font-black text-emerald-950 mb-2">{program.title}</h3>
+                  <div className={`text-[10px] font-black uppercase tracking-widest ${program.color === 'emerald' ? 'text-emerald-600' : 'text-amber-600'}`}>
+                    {program.subtitle}
+                  </div>
+                </div>
+
+                <p className="text-stone-500 leading-relaxed text-sm font-bold text-center mb-8">
+                  {program.description}
+                </p>
+
+                <div className="space-y-4 mb-10 flex-grow">
+                  {program.features.map((feat, fIdx) => (
+                    <div key={fIdx} className="flex items-start gap-3">
+                      <div className="w-5 h-5 rounded-full bg-emerald-50 flex items-center justify-center border border-emerald-100 flex-shrink-0 mt-0.5">
+                        <CheckCircle className="w-3 h-3 text-emerald-600" />
+                      </div>
+                      <span className="text-xs font-bold text-stone-600 text-left leading-tight">{feat}</span>
+                    </div>
                   ))}
                 </div>
-              </CardContent>
-              {/* Hover Gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-            </Card>
+
+                <Button className="mt-auto w-full group-hover:bg-emerald-600 group-hover:text-white transition-colors font-black h-12 rounded-xl border-emerald-100 text-emerald-900" variant="outline">
+                  Learn More <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </div>
+            </motion.div>
           ))}
         </div>
 
-        {/* Bottom Stats */}
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8">
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-2 mb-2">
-              <Clock className="w-6 h-6 text-emerald-600" />
-              <span className="text-3xl font-bold">24/7</span>
+        {/* The 3-Step Journey Redesigned */}
+        <div className="relative pt-24 pb-20 px-8 lg:px-20 bg-emerald-900 rounded-[3rem] overflow-hidden shadow-2xl border border-emerald-800">
+          <div className="absolute inset-0 bg-islamic-pattern opacity-[0.05] pointer-events-none" />
+
+          <div className="relative z-10">
+            <div className="text-center mb-20">
+              <Badge className="bg-white/10 text-emerald-100 mb-6 px-4 py-1.5 font-black uppercase tracking-[0.2em] text-[10px] border border-white/10">
+                Smooth Professional Process
+              </Badge>
+              <h2 className="text-4xl lg:text-5xl font-black text-white tracking-tighter">
+                3 Steps to <span className="text-gold-accent">Excellence</span>
+              </h2>
             </div>
-            <p className="text-muted-foreground">Class Availability</p>
-          </div>
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-2 mb-2">
-              <Star className="w-6 h-6 text-amber-500 fill-amber-500" />
-              <span className="text-3xl font-bold">50+</span>
+
+            <div className="grid lg:grid-cols-3 gap-16">
+              {steps.map((step, idx) => (
+                <motion.div
+                  key={step.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.2 }}
+                  className="relative flex flex-col items-center text-center group"
+                >
+                  {/* Connector - Enhanced */}
+                  {step.id < 3 && (
+                    <div className="hidden lg:block absolute top-12 left-[80%] w-[40%] h-0.5 border-t border-dashed border-emerald-700 z-0" />
+                  )}
+
+                  <div className="w-24 h-24 relative mb-8">
+                    <div className="absolute inset-0 bg-gold-accent/20 blur-2xl rounded-full scale-0 group-hover:scale-150 transition-transform duration-700" />
+                    <div className="relative w-full h-full bg-emerald-800/50 backdrop-blur-xl border border-emerald-700 rounded-[2rem] flex items-center justify-center group-hover:bg-gold-accent group-hover:border-gold-accent transition-all duration-500 transform group-hover:-rotate-6 shadow-inner">
+                      <step.icon className="w-10 h-10 text-gold-accent group-hover:text-emerald-900" />
+                      <div className="absolute -bottom-3 -right-3 w-10 h-10 bg-white text-emerald-900 rounded-full flex items-center justify-center font-black text-xl shadow-xl border-4 border-emerald-900">
+                        {step.id}
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3 className="text-2xl font-black text-white mb-3">{step.title}</h3>
+                  <p className="text-emerald-100/70 text-sm font-semibold leading-relaxed max-w-xs">
+                    {step.description}
+                  </p>
+                </motion.div>
+              ))}
             </div>
-            <p className="text-muted-foreground">Countries Served</p>
-          </div>
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-2 mb-2">
-              <GraduationCap className="w-6 h-6 text-emerald-600" />
-              <span className="text-3xl font-bold">100+</span>
-            </div>
-            <p className="text-muted-foreground">Hafiz Graduated</p>
-          </div>
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-2 mb-2">
-              <Heart className="w-6 h-6 text-rose-500 fill-rose-500" />
-              <span className="text-3xl font-bold">98%</span>
-            </div>
-            <p className="text-muted-foreground">Parent Satisfaction</p>
           </div>
         </div>
+
       </div>
     </section>
   );

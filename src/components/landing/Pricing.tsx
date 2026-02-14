@@ -1,194 +1,132 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { CheckCircle2, Star, Zap } from 'lucide-react';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import { CheckCircle2, Star, ShieldCheck, Lock, Globe, Zap, Sparkles } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const plans = [
   {
     name: 'Starter',
-    description: 'Perfect for trying out our services',
-    price: 30,
-    duration: '/month',
-    sessions: '4 Classes',
-    perWeek: '1 class/week',
-    features: [
-      '30-minute sessions',
-      'Quran reading basics',
-      'Progress tracking',
-      'Parent dashboard access',
-      'Email support',
-    ],
+    price: '$30',
+    frequency: 'Month',
+    features: ['2 Classes per week', '30 Minutes duration', 'Certified Tutors', 'Basic Progress Report'],
     popular: false,
-    cta: 'Start Learning',
+    color: 'emerald'
   },
   {
-    name: 'Standard',
-    description: 'Most popular for consistent progress',
-    price: 50,
-    duration: '/month',
-    sessions: '8 Classes',
-    perWeek: '2 classes/week',
-    features: [
-      '30-minute sessions',
-      'All course options',
-      'Weekly progress reports',
-      'Class recordings',
-      'WhatsApp support',
-      'Makeup classes',
-    ],
+    name: 'Recommended',
+    price: '$50',
+    frequency: 'Month',
+    features: ['3 Classes per week', '30 Minutes duration', 'Senior Scholars', 'Weekly Progress Report', 'Offline Hifz Support'],
     popular: true,
-    cta: 'Get Started',
+    color: 'gold'
   },
   {
     name: 'Intensive',
-    description: 'For serious learners & Hifz students',
-    price: 90,
-    duration: '/month',
-    sessions: '16 Classes',
-    perWeek: '4 classes/week',
-    features: [
-      '30-minute sessions',
-      'All courses included',
-      'Daily progress updates',
-      'Priority scheduling',
-      '24/7 WhatsApp support',
-      'Unlimited makeup classes',
-      'Monthly parent meetings',
-    ],
+    price: '$80',
+    frequency: 'Month',
+    features: ['5 Classes per week', '45 Minutes duration', 'Ijazah Certified Tutors', '24/7 Support Access', 'Detailed Analysis'],
     popular: false,
-    cta: 'Enroll Now',
-  },
-  {
-    name: 'Hifz Program',
-    description: 'Complete Quran memorization',
-    price: 120,
-    duration: '/month',
-    sessions: '20 Classes',
-    perWeek: '5 classes/week',
-    features: [
-      '45-minute sessions',
-      'Dedicated Hifz teacher',
-      'Personalized memorization plan',
-      'Daily revision sessions',
-      'Monthly assessments',
-      'Ijazah upon completion',
-      'Certificate of completion',
-    ],
-    popular: false,
-    cta: 'Join Hifz Program',
-  },
+    color: 'emerald'
+  }
 ];
 
 export function Pricing() {
-  const scrollToContact = () => {
-    document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
-    <section id="pricing" className="py-24 bg-muted/30">
-      <div className="container mx-auto px-4">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <Badge className="bg-emerald-100 text-emerald-700 hover:bg-emerald-100 mb-4">
-            Affordable Plans
+    <section id="pricing" className="py-24 bg-[hsl(35,30%,96%)] relative overflow-hidden">
+      <div className="absolute inset-0 bg-islamic-pattern opacity-[0.03] pointer-events-none" />
+
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="text-center max-w-3xl mx-auto mb-20">
+          <Badge className="bg-emerald-100 text-emerald-800 border-none mb-4 px-6 py-2 font-black uppercase tracking-widest text-[10px]">
+            Affordable Excellence
           </Badge>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            Investment in Your Child's{' '}
-            <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-              Akhirah
-            </span>
+          <h2 className="text-4xl lg:text-6xl font-black text-emerald-950 mb-6 tracking-tight">
+            Simple, Transparent <span className="text-emerald-600">Pricing</span>
           </h2>
-          <p className="text-lg text-muted-foreground">
-            Quality Quran education at prices every family can afford. 
-            Choose a plan that fits your child's learning goals.
+          <p className="text-xl text-stone-600 font-bold max-w-2xl mx-auto leading-relaxed">
+            Invest in your spiritual future with plans designed for every family budget.
           </p>
         </div>
 
-        {/* Pricing Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {plans.map((plan) => (
-            <Card
-              key={plan.name}
-              className={`relative overflow-hidden transition-all duration-300 hover:shadow-xl ${
-                plan.popular
-                  ? 'border-2 border-emerald-500 shadow-lg shadow-emerald-500/10'
-                  : 'border-2 hover:border-emerald-200'
-              }`}
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto items-center">
+          {plans.map((plan, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1 }}
+              className={`relative ${plan.popular ? 'md:-mt-8 md:-mb-8 z-10' : 'z-0'}`}
             >
               {plan.popular && (
-                <div className="absolute top-4 right-4">
-                  <Badge className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white">
-                    <Star className="w-3 h-3 mr-1 fill-white" />
-                    Most Popular
+                <div className="absolute -top-5 left-0 right-0 flex justify-center z-20">
+                  <Badge className="bg-gold-accent text-emerald-950 border-4 border-[hsl(35,30%,96%)] px-6 py-1.5 text-xs font-black uppercase tracking-wider shadow-lg">
+                    Most Parents Choose This
                   </Badge>
                 </div>
               )}
 
-              <CardHeader className="pb-4">
-                <CardTitle className="text-xl">{plan.name}</CardTitle>
-                <CardDescription>{plan.description}</CardDescription>
-              </CardHeader>
+              <Card className={`h-full border-0 relative overflow-hidden flex flex-col ${plan.popular
+                  ? 'shadow-2xl scale-105 bg-white ring-4 ring-gold-accent/20'
+                  : 'shadow-lg bg-white/60 backdrop-blur-sm hover:bg-white transition-colors'
+                }`}>
+                {/* Header Pattern */}
+                <div className={`absolute top-0 inset-x-0 h-2 ${plan.popular ? 'bg-gold-accent' : 'bg-emerald-600'}`} />
 
-              <CardContent className="space-y-6">
-                {/* Price */}
-                <div>
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-4xl font-bold">${plan.price}</span>
-                    <span className="text-muted-foreground">{plan.duration}</span>
+                <CardContent className="p-8 pb-0 flex-grow text-center">
+                  <h3 className="text-xl font-black text-emerald-900 mb-2">{plan.name}</h3>
+                  <div className="flex items-baseline justify-center gap-1 mb-6">
+                    <span className={`text-5xl font-black tracking-tight ${plan.popular ? 'text-emerald-950' : 'text-emerald-800'}`}>{plan.price}</span>
+                    <span className="text-sm font-bold text-stone-400">/{plan.frequency}</span>
                   </div>
-                  <div className="flex items-center gap-2 mt-2 text-sm">
-                    <Badge variant="secondary" className="bg-emerald-50 text-emerald-700">
-                      {plan.sessions}
-                    </Badge>
-                    <span className="text-muted-foreground">• {plan.perWeek}</span>
+
+                  <div className="space-y-4 text-left">
+                    {plan.features.map((feature, fIdx) => (
+                      <div key={fIdx} className="flex items-start gap-3 group">
+                        <CheckCircle2 className={`w-5 h-5 flex-shrink-0 mt-0.5 ${plan.popular ? 'text-gold-accent' : 'text-emerald-500 group-hover:text-emerald-600'}`} />
+                        <span className={`text-sm font-bold ${plan.popular ? 'text-slate-700' : 'text-slate-500'}`}>
+                          {feature}
+                        </span>
+                      </div>
+                    ))}
                   </div>
-                </div>
+                </CardContent>
 
-                {/* Features */}
-                <ul className="space-y-3">
-                  {plan.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-2">
-                      <CheckCircle2 className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
-                      <span className="text-sm">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-
-              <CardFooter>
-                <Button
-                  onClick={scrollToContact}
-                  className={`w-full ${
-                    plan.popular
-                      ? 'bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white shadow-lg'
-                      : ''
-                  }`}
-                  variant={plan.popular ? 'default' : 'outline'}
-                >
-                  {plan.cta}
-                </Button>
-              </CardFooter>
-            </Card>
+                <CardFooter className="p-8 pt-8 mt-auto">
+                  <Button
+                    className={`w-full h-12 text-sm font-black rounded-xl shadow-lg transition-all ${plan.popular
+                        ? 'bg-gold-accent hover:bg-amber-400 text-emerald-950 hover:scale-[1.02]'
+                        : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200'
+                      }`}
+                  >
+                    Get Started
+                  </Button>
+                </CardFooter>
+              </Card>
+            </motion.div>
           ))}
         </div>
 
-        {/* Money-Back Guarantee */}
-        <div className="mt-12 p-6 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-2xl border border-emerald-100 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-full bg-emerald-100 flex items-center justify-center">
-              <Zap className="w-7 h-7 text-emerald-600" />
+        {/* Guarantee Banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-20 max-w-3xl mx-auto text-center bg-white rounded-3xl p-8 border border-emerald-100 shadow-xl relative overflow-hidden"
+        >
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 via-gold-accent to-emerald-400" />
+          <div className="flex flex-col md:flex-row items-center justify-center gap-6">
+            <div className="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center flex-shrink-0">
+              <ShieldCheck className="w-8 h-8 text-emerald-600" />
             </div>
-            <div>
-              <h3 className="font-semibold text-lg">100% Money-Back Guarantee</h3>
-              <p className="text-muted-foreground">
-                Not satisfied? Get a full refund within the first week - no questions asked.
-              </p>
+            <div className="text-left">
+              <h4 className="text-xl font-black text-emerald-950 mb-1">100% Satisfaction Guarantee</h4>
+              <p className="text-stone-500 text-sm font-medium">If you are not satisfied with your first week of classes, we will refund your fee. No questions asked.</p>
             </div>
           </div>
-          <Button onClick={scrollToContact} variant="outline" className="whitespace-nowrap">
-            Start Free Trial
-          </Button>
-        </div>
+        </motion.div>
+
       </div>
     </section>
   );
