@@ -10,45 +10,48 @@
 
 @layer base {
   :root {
-    /* Core Background & Text */
-    --background: 220 20% 97%;
-    --foreground: 222 47% 11%;
+    /* Core Background & Text - WARM PARCHMENT THEME */
+    --background: 40 30% 98%; /* Warm Cream */
+    --foreground: 165 90% 10%; /* Deepest Emerald Black */
 
     /* Card surfaces */
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card: 40 30% 99%;
+    --card-foreground: 165 90% 10%;
 
     /* Popover/Dropdown */
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover: 40 30% 99%;
+    --popover-foreground: 165 90% 10%;
 
-    /* Primary - Original Emerald Green */
-    --primary: 162 64% 28%;
-    --primary-foreground: 0 0% 100%;
+    /* Primary - Deep Emerald */
+    --primary: 165 85% 25%; /* Richer, darker emerald */
+    --primary-foreground: 40 30% 98%;
 
-    /* Secondary - Fresh Mint */
-    --secondary: 158 35% 95%;
-    --secondary-foreground: 162 64% 15%;
+    /* Secondary - Gold/Sand */
+    --secondary: 45 60% 94%; /* Pale gold background */
+    --secondary-foreground: 165 90% 15%;
 
     /* Muted */
-    --muted: 210 20% 96%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 40 15% 92%;
+    --muted-foreground: 165 20% 40%;
 
     /* Accent - Gold */
-    --accent: 36 67% 53%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 45 90% 50%; /* Pure Gold */
+    --accent-foreground: 165 90% 10%;
 
     /* Destructive */
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 40 30% 98%;
 
     /* Border & Input */
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 162 64% 28%;
+    --border: 165 30% 85%; /* Soft Green-Grey */
+    --input: 165 30% 85%;
+    --ring: 165 85% 25%;
 
-    /* Radius */
-    --radius: 0.5rem;
+    /* Custom Radius */
+    --radius: 0.75rem;
+
+    /* Custom Gradients - Will be used in components */
+    --gradient-warm-radiant: radial-gradient(circle at top left, hsl(45 90% 90% / 0.4), transparent 40%), radial-gradient(circle at bottom right, hsl(165 85% 90% / 0.4), transparent 40%);
 
     /* Islamic Premium Palette - Green & Gold */
     --islamic-green-dark: 162 64% 15%;
