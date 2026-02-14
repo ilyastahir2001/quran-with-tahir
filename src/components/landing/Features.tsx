@@ -106,9 +106,9 @@ export function Features() {
                 </div>
               )}
 
-              <div className="relative bg-white pt-12 pb-10 px-6 rounded-b-[2.5rem] islam-arched-full border border-amber-100/50 shadow-sm group-hover:shadow-[0_20px_40px_-15px_rgba(16,185,129,0.1)] transition-all duration-500 hover:-translate-y-2 flex flex-col h-full">
-                {/* Header Arch Style */}
-                <div className="absolute top-0 inset-x-0 h-4 bg-gradient-to-r from-emerald-500/10 via-gold-accent/10 to-emerald-500/10 rounded-t-full" />
+              <div className="relative bg-white pt-8 pb-10 px-8 rounded-3xl border border-slate-100 shadow-sm group-hover:shadow-xl hover:border-emerald-200 transition-all duration-500 hover:-translate-y-1 flex flex-col h-full">
+
+                {/* Standard Card Header */}
 
                 <div className="text-center mb-8">
                   <div className={`w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-2xl ${program.color === 'emerald' ? 'bg-emerald-50 text-emerald-600' : 'bg-amber-50 text-gold-accent'} group-hover:scale-110 transition-transform`}>
