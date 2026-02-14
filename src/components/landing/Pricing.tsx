@@ -1,6 +1,6 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { CheckCircle2, Star, Zap } from 'lucide-react';
 
 const plans = [
@@ -85,21 +85,22 @@ export function Pricing() {
   };
 
   return (
-    <section id="pricing" className="py-24 bg-muted/30">
-      <div className="container mx-auto px-4">
+    <section id="pricing" className="py-24 bg-cream-light relative overflow-hidden">
+      {/* Background patterns */}
+      <div className="absolute inset-0 bg-islamic-pattern opacity-5" />
+
+      <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <Badge className="bg-emerald-100 text-emerald-700 hover:bg-emerald-100 mb-4">
+          <Badge className="bg-gold-primary/10 text-gold-primary border-gold-primary/20 mb-4 px-4 py-1">
             Affordable Plans
           </Badge>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            Investment in Your Child's{' '}
-            <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-              Akhirah
-            </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[hsl(var(--islamic-blue-dark))] mb-6">
+            Investment in Your Child's <span className="text-gold-primary">Akhirah</span>
           </h2>
-          <p className="text-lg text-muted-foreground">
-            Quality Quran education at prices every family can afford. 
+          <div className="w-24 h-1 bg-gold-primary mx-auto mb-6 rounded-full" />
+          <p className="text-lg text-slate-600">
+            Quality Quran education at prices every family can afford.
             Choose a plan that fits your child's learning goals.
           </p>
         </div>
@@ -109,60 +110,56 @@ export function Pricing() {
           {plans.map((plan) => (
             <Card
               key={plan.name}
-              className={`relative overflow-hidden transition-all duration-300 hover:shadow-xl ${
-                plan.popular
-                  ? 'border-2 border-emerald-500 shadow-lg shadow-emerald-500/10'
-                  : 'border-2 hover:border-emerald-200'
-              }`}
+              className={`relative overflow-hidden transition-all duration-500 hover:shadow-2xl flex flex-col ${plan.popular
+                  ? 'border-2 border-gold-primary shadow-xl shadow-gold-primary/10'
+                  : 'border border-slate-200 hover:border-gold-primary/50'
+                } rounded-3xl group`}
             >
-              {plan.popular && (
-                <div className="absolute top-4 right-4">
-                  <Badge className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white">
-                    <Star className="w-3 h-3 mr-1 fill-white" />
-                    Most Popular
-                  </Badge>
-                </div>
-              )}
+              {/* Mihrab Arched Header */}
+              <div className={`pt-10 pb-6 px-6 text-center relative overflow-hidden ${plan.popular ? 'bg-[hsl(var(--islamic-blue-dark))] text-white' : 'bg-slate-50 text-slate-800'
+                } islamic-arched`}>
+                {plan.popular && (
+                  <div className="absolute top-0 right-0 p-2">
+                    <Star className="w-5 h-5 text-gold-accent fill-gold-accent transform rotate-12" />
+                  </div>
+                )}
+                <h3 className="text-2xl font-black mb-1">{plan.name}</h3>
+                <p className={`text-xs ${plan.popular ? 'text-blue-100/60' : 'text-slate-500'} uppercase tracking-widest font-bold`}>
+                  {plan.perWeek}
+                </p>
+              </div>
 
-              <CardHeader className="pb-4">
-                <CardTitle className="text-xl">{plan.name}</CardTitle>
-                <CardDescription>{plan.description}</CardDescription>
-              </CardHeader>
-
-              <CardContent className="space-y-6">
+              <CardContent className="space-y-6 pt-8 flex-grow">
                 {/* Price */}
-                <div>
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-4xl font-bold">${plan.price}</span>
-                    <span className="text-muted-foreground">{plan.duration}</span>
+                <div className="text-center mb-8">
+                  <div className="flex items-center justify-center gap-1">
+                    <span className="text-sm font-bold text-slate-400 mt-2">$</span>
+                    <span className="text-5xl font-black text-slate-800 tracking-tight">{plan.price}</span>
+                    <span className="text-slate-400 text-sm font-medium">{plan.duration}</span>
                   </div>
-                  <div className="flex items-center gap-2 mt-2 text-sm">
-                    <Badge variant="secondary" className="bg-emerald-50 text-emerald-700">
-                      {plan.sessions}
-                    </Badge>
-                    <span className="text-muted-foreground">• {plan.perWeek}</span>
-                  </div>
+                  <Badge variant="outline" className="mt-4 border-gold-primary/30 text-gold-primary font-bold">
+                    {plan.sessions} Total
+                  </Badge>
                 </div>
 
                 {/* Features */}
-                <ul className="space-y-3">
+                <ul className="space-y-4">
                   {plan.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-2">
-                      <CheckCircle2 className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
-                      <span className="text-sm">{feature}</span>
+                    <li key={feature} className="flex items-start gap-3">
+                      <CheckCircle2 className="w-5 h-5 text-gold-primary flex-shrink-0 mt-0.5" />
+                      <span className="text-sm text-slate-600 font-medium">{feature}</span>
                     </li>
                   ))}
                 </ul>
               </CardContent>
 
-              <CardFooter>
+              <CardFooter className="pb-8 pt-4">
                 <Button
                   onClick={scrollToContact}
-                  className={`w-full ${
-                    plan.popular
-                      ? 'bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white shadow-lg'
-                      : ''
-                  }`}
+                  className={`w-full h-14 text-lg font-bold transition-all duration-300 ${plan.popular
+                      ? 'bg-gold-primary hover:bg-gold-accent text-white shadow-lg transform hover:-translate-y-1'
+                      : 'bg-white border-2 border-slate-200 text-slate-700 hover:border-gold-primary hover:text-gold-primary hover:bg-gold-primary/5'
+                    }`}
                   variant={plan.popular ? 'default' : 'outline'}
                 >
                   {plan.cta}
@@ -173,20 +170,24 @@ export function Pricing() {
         </div>
 
         {/* Money-Back Guarantee */}
-        <div className="mt-12 p-6 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-2xl border border-emerald-100 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-full bg-emerald-100 flex items-center justify-center">
-              <Zap className="w-7 h-7 text-emerald-600" />
+        <div className="mt-16 p-8 bg-[hsl(var(--islamic-blue-dark))] rounded-[2rem] border border-white/10 flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl relative overflow-hidden">
+          <div className="absolute inset-0 bg-islamic-pattern opacity-10" />
+          <div className="relative z-10 flex items-center gap-6">
+            <div className="w-20 h-20 rounded-2xl bg-gold-primary/20 backdrop-blur-md flex items-center justify-center border border-gold-primary/30">
+              <Zap className="w-10 h-10 text-gold-accent" />
             </div>
             <div>
-              <h3 className="font-semibold text-lg">100% Money-Back Guarantee</h3>
-              <p className="text-muted-foreground">
-                Not satisfied? Get a full refund within the first week - no questions asked.
+              <h3 className="font-bold text-2xl text-white">Trust & Quality Guaranteed</h3>
+              <p className="text-blue-100/60 max-w-md">
+                We are so confident in our quality that we offer a 100% money-back guarantee if you're not satisfied within the first week.
               </p>
             </div>
           </div>
-          <Button onClick={scrollToContact} variant="outline" className="whitespace-nowrap">
-            Start Free Trial
+          <Button
+            onClick={scrollToContact}
+            className="relative z-10 h-14 px-10 bg-white text-blue-900 font-bold hover:bg-gold-accent hover:text-white transition-all transform hover:scale-105 whitespace-nowrap"
+          >
+            Start Your Free Trial
           </Button>
         </div>
       </div>

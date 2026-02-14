@@ -38,7 +38,7 @@ export function Navbar() {
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         isScrolled
-          ? 'bg-background/95 backdrop-blur-md shadow-lg border-b'
+          ? 'bg-white/95 backdrop-blur-md shadow-lg border-b'
           : 'bg-transparent'
       )}
     >
@@ -46,10 +46,10 @@ export function Navbar() {
         <nav className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group transition-all duration-300">
-            <img 
-              src="/logo.png" 
-              alt="Quran With Tahir" 
-              className="h-16 md:h-20 w-auto object-contain drop-shadow-md group-hover:scale-110 transition-transform duration-500 animate-in fade-in zoom-in duration-1000" 
+            <img
+              src="/logo.png"
+              alt="Quran With Tahir"
+              className="h-16 md:h-20 w-auto object-contain drop-shadow-md group-hover:scale-110 transition-transform duration-500 animate-in fade-in zoom-in duration-1000"
             />
           </Link>
 
@@ -60,7 +60,7 @@ export function Navbar() {
                 <Link
                   key={link.href}
                   to={link.href}
-                  className="text-sm font-bold text-emerald-600 hover:text-emerald-700 transition-colors flex items-center gap-2"
+                  className="text-sm font-bold text-blue-700 hover:text-gold-primary transition-colors flex items-center gap-2"
                 >
                   <BookOpen className="w-4 h-4" />
                   {link.label}
@@ -69,7 +69,10 @@ export function Navbar() {
                 <button
                   key={link.href}
                   onClick={() => scrollToSection(link.href)}
-                  className="text-sm font-medium text-foreground/80 hover:text-emerald-600 transition-colors"
+                  className={cn(
+                    "text-sm font-medium transition-colors",
+                    isScrolled ? "text-slate-600 hover:text-blue-700" : "text-white/80 hover:text-white"
+                  )}
                 >
                   {link.label}
                 </button>
@@ -81,19 +84,24 @@ export function Navbar() {
           <div className="hidden lg:flex items-center gap-4">
             <a
               href="tel:+923110267879"
-              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-emerald-600 transition-colors"
+              className={cn(
+                "flex items-center gap-2 text-sm transition-colors",
+                isScrolled ? "text-slate-500 hover:text-blue-700" : "text-white/60 hover:text-white"
+              )}
             >
               <Phone className="w-4 h-4" />
               <span>+92 311 026 7879</span>
             </a>
             <Link to="/login">
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" className={cn(
+                isScrolled ? "border-slate-200" : "border-white/20 text-white hover:bg-white/10"
+              )}>
                 Login
               </Button>
             </Link>
             <Button
               onClick={() => scrollToSection('#contact')}
-              className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white shadow-lg"
+              className="bg-gold-primary hover:bg-gold-accent text-white shadow-lg"
             >
               Free Trial Class
             </Button>
@@ -102,7 +110,10 @@ export function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 rounded-lg hover:bg-muted transition-colors"
+            className={cn(
+              "lg:hidden p-2 rounded-lg transition-colors",
+              isScrolled ? "hover:bg-slate-100 text-slate-800" : "hover:bg-white/10 text-white"
+            )}
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -110,14 +121,14 @@ export function Navbar() {
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="lg:hidden py-4 border-t bg-background/95 backdrop-blur-md">
-            <div className="flex flex-col gap-4">
+          <div className="lg:hidden py-4 border-t bg-white shadow-2xl rounded-b-3xl mt-2 animate-in slide-in-from-top duration-300">
+            <div className="flex flex-col gap-4 px-4">
               {navLinks.map((link) => (
                 link.isExternal ? (
                   <Link
                     key={link.href}
                     to={link.href}
-                    className="py-3 text-lg font-bold text-emerald-600 border-b border-border flex items-center gap-3"
+                    className="py-3 text-lg font-bold text-blue-700 border-b border-slate-100 flex items-center gap-3"
                     onClick={() => setIsOpen(false)}
                   >
                     <BookOpen className="w-5 h-5" />
@@ -127,28 +138,28 @@ export function Navbar() {
                   <button
                     key={link.href}
                     onClick={() => scrollToSection(link.href)}
-                    className="text-left py-2 text-foreground/80 hover:text-emerald-600 transition-colors"
+                    className="text-left py-2 text-slate-600 hover:text-blue-700 transition-colors border-b border-slate-50"
                   >
                     {link.label}
                   </button>
                 )
               ))}
-              <div className="flex flex-col gap-3 pt-4 border-t">
+              <div className="flex flex-col gap-3 pt-4">
                 <a
                   href="tel:+923110267879"
-                  className="flex items-center gap-2 text-muted-foreground"
+                  className="flex items-center gap-2 text-slate-500"
                 >
                   <Phone className="w-4 h-4" />
                   <span>+92 311 026 7879</span>
                 </a>
-                <Link to="/login">
-                  <Button variant="outline" className="w-full">
+                <Link to="/login" className="w-full" onClick={() => setIsOpen(false)}>
+                  <Button variant="outline" className="w-full border-slate-200">
                     Login
                   </Button>
                 </Link>
                 <Button
                   onClick={() => scrollToSection('#contact')}
-                  className="w-full bg-gradient-to-r from-emerald-500 to-teal-600"
+                  className="w-full bg-blue-700 hover:bg-blue-800 text-white"
                 >
                   Free Trial Class
                 </Button>
