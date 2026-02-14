@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 
 export function Footer() {
   return (
-    <footer className="bg-emerald-950 text-emerald-100 pt-20 pb-10 relative overflow-hidden">
+    <footer className="bg-emerald-900 text-emerald-100 pt-20 pb-10 relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5 pointer-events-none">
         <div className="absolute top-0 right-0 w-96 h-96 bg-gold-accent rounded-full blur-[150px]" />

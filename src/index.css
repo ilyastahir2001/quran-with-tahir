@@ -10,21 +10,21 @@
 
 @layer base {
   :root {
-    /* Core Background & Text - WARM PARCHMENT THEME */
-    --background: 40 30% 98%; /* Warm Cream */
-    --foreground: 165 90% 10%; /* Deepest Emerald Black */
+    /* Core Background & Text - Standard Theme */
+    --background: 0 0% 100%; /* Pure White */
+    --foreground: 222 47% 11%; /* Standard Slate-900 */
 
     /* Card surfaces */
-    --card: 40 30% 99%;
-    --card-foreground: 165 90% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
 
     /* Popover/Dropdown */
-    --popover: 40 30% 99%;
-    --popover-foreground: 165 90% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
 
-    /* Primary - Deep Emerald */
-    --primary: 165 85% 25%; /* Richer, darker emerald */
-    --primary-foreground: 40 30% 98%;
+    /* Primary - Standard Emerald (Live Site Green) */
+    --primary: 159 64% 43%; /* Tailwind Emerald-600 */
+    --primary-foreground: 0 0% 100%;
 
     /* Secondary - Gold/Sand */
     --secondary: 45 60% 94%; /* Pale gold background */
