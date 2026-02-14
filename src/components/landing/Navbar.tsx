@@ -5,12 +5,12 @@ import { Menu, X, BookOpen, Phone, ShieldCheck, Clock, CheckCircle2 } from 'luci
 import { cn } from '@/lib/utils';
 
 const navLinks = [
-  { href: '/holy-quran', label: 'Holy Quran', isExternal: true },
-  { href: '#features', label: 'Programs' },
-  { href: '#about', label: 'About Us' },
-  { href: '#testimonials', label: 'Testimonials' },
-  { href: '#pricing', label: 'Pricing' },
-  { href: '#contact', label: 'Contact' },
+  { href: '/holy-quran', label: 'Holy Quran' },
+  { href: '/programs', label: 'Programs' },
+  { href: '/about', label: 'About Us' },
+  { href: '/testimonials', label: 'Testimonials' },
+  { href: '/pricing', label: 'Pricing' },
+  { href: '/contact', label: 'Contact' },
 ];
 
 export function Navbar() {
@@ -25,20 +25,7 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      const offset = 80; // height of navbar
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
-    setIsOpen(false);
-  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
@@ -87,31 +74,16 @@ export function Navbar() {
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-10">
               {navLinks.map((link) => (
-                link.isExternal ? (
-                  <Link
-                    key={link.href}
-                    to={link.href}
-                    className="text-sm font-black text-emerald-700 hover:text-gold-primary transition-all duration-300 flex items-center gap-2 group"
-                  >
-                    <BookOpen className="w-4 h-4 group-hover:rotate-12 transition-transform" />
-                    <span className="relative">
-                      {link.label}
-                      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold-primary transition-all duration-300 group-hover:w-full" />
-                    </span>
-                  </Link>
-                ) : (
-                  <button
-                    key={link.href}
-                    onClick={() => scrollToSection(link.href)}
-                    className={cn(
-                      "text-sm font-black transition-all duration-300 relative group",
-                      isScrolled ? "text-slate-600 hover:text-emerald-700" : "text-emerald-900/80 hover:text-emerald-700"
-                    )}
-                  >
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  className="text-sm font-black text-emerald-900/80 hover:text-emerald-700 transition-all duration-300 flex items-center gap-2 group relative"
+                >
+                  <span className="relative">
                     {link.label}
                     <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-500 transition-all duration-300 group-hover:w-full" />
-                  </button>
-                )
+                  </span>
+                </Link>
               ))}
             </div>
 
@@ -139,12 +111,13 @@ export function Navbar() {
                 </Button>
               </Link>
 
-              <Button
-                onClick={() => scrollToSection('#contact')}
-                className="bg-emerald-600 hover:bg-emerald-700 text-white shadow-[0_4px_14px_0_rgba(16,185,129,0.39)] font-black px-8 h-12 rounded-xl transition-all hover:-translate-y-1 active:scale-95 border-b-4 border-emerald-800"
-              >
-                Free Trial Class
-              </Button>
+              <Link to="/contact">
+                <Button
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white shadow-[0_4px_14px_0_rgba(16,185,129,0.39)] font-black px-8 h-12 rounded-xl transition-all hover:-translate-y-1 active:scale-95 border-b-4 border-emerald-800"
+                >
+                  Free Trial Class
+                </Button>
+              </Link>
             </div>
 
             {/* Mobile Menu Button */}
@@ -164,25 +137,15 @@ export function Navbar() {
             <div className="lg:hidden py-6 bg-white border border-emerald-50 shadow-2xl rounded-3xl mt-2 animate-in slide-in-from-top zoom-in-95 duration-500">
               <div className="flex flex-col gap-2 px-6">
                 {navLinks.map((link) => (
-                  link.isExternal ? (
-                    <Link
-                      key={link.href}
-                      to={link.href}
-                      className="py-4 text-lg font-black text-emerald-700 flex items-center gap-3 active:scale-95 transition-all"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      <BookOpen className="w-6 h-6" />
-                      {link.label}
-                    </Link>
-                  ) : (
-                    <button
-                      key={link.href}
-                      onClick={() => scrollToSection(link.href)}
-                      className="text-left py-4 text-slate-700 hover:text-emerald-700 font-extrabold border-b border-slate-50 transition-all active:scale-95"
-                    >
-                      {link.label}
-                    </button>
-                  )
+                  <Link
+                    key={link.href}
+                    to={link.href}
+                    className="py-4 text-lg font-black text-emerald-700 hover:text-emerald-800 flex items-center gap-3 active:scale-95 transition-all border-b border-slate-50"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {link.label === 'Holy Quran' && <BookOpen className="w-6 h-6" />}
+                    {link.label}
+                  </Link>
                 ))}
 
                 <div className="flex flex-col gap-4 mt-6">
@@ -200,12 +163,13 @@ export function Navbar() {
                         Login
                       </Button>
                     </Link>
-                    <Button
-                      onClick={() => scrollToSection('#contact')}
-                      className="w-full h-14 bg-emerald-600 hover:bg-emerald-700 text-white font-black rounded-2xl shadow-lg"
-                    >
-                      Free Trial
-                    </Button>
+                    <Link to="/contact" onClick={() => setIsOpen(false)}>
+                      <Button
+                        className="w-full h-14 bg-emerald-600 hover:bg-emerald-700 text-white font-black rounded-2xl shadow-lg"
+                      >
+                        Free Trial
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </div>
