@@ -1,5 +1,6 @@
 import { Badge } from '@/components/ui/badge';
-import { CheckCircle2, Award, Users, Shield, Globe, Heart } from 'lucide-react';
+import { CheckCircle2, Award, Users, Shield, Globe, Heart, Sparkles, BookOpen } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const values = [
   {
@@ -24,99 +25,118 @@ const values = [
   },
 ];
 
-const achievements = [
-  'Ijazah-certified Quran teachers',
-  'Background-verified instructors',
-  'Child-safe learning platform',
-  'Free trial class - no obligation',
-  'Flexible scheduling options',
-  'Progress reports for parents',
-  'Male & female teachers available',
-  'Native Arabic speakers',
-];
-
 export function About() {
   return (
-    <section id="about" className="py-24 bg-muted/30">
-      <div className="container mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left Content */}
-          <div className="space-y-8">
-            <div>
-              <Badge className="bg-emerald-100 text-emerald-700 hover:bg-emerald-100 mb-4">
-                About Us
+    <section id="about" className="py-32 bg-[#fcfaf7] relative overflow-hidden">
+      {/* Decorative Overlays */}
+      <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-white to-transparent" />
+      <div className="absolute right-0 top-0 w-1/3 h-full opacity-[0.02] pointer-events-none">
+        <div className="absolute inset-0 bg-islamic-pattern" />
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-20 items-center">
+
+          {/* Left Content: The Story & Vision */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="space-y-10"
+          >
+            <div className="space-y-6">
+              <Badge className="bg-emerald-50 text-emerald-700 border-emerald-100 mb-2 px-6 py-2 uppercase tracking-widest text-[10px] font-black">
+                Our Vision & Mission
               </Badge>
-              <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-                Where Faith Meets{' '}
-                <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-                  Modern Education
-                </span>
+              <h2 className="text-4xl lg:text-7xl font-black text-slate-800 tracking-tighter leading-tight">
+                Empowering the <span className="gradient-text-emerald">Next Generation</span>
               </h2>
-              <p className="text-lg text-muted-foreground">
-                <strong>Quran With Tahir</strong> was founded with a simple yet profound mission: 
-                to make authentic Quran education accessible to every Muslim family, regardless of location.
+              <p className="text-xl text-slate-500 font-bold leading-relaxed">
+                Quran With Tahir was founded to bridge the gap between traditional Islamic scholarship and the modern digital world.
               </p>
             </div>
 
-            <div className="space-y-4 text-muted-foreground">
+            <div className="space-y-6 text-slate-600 font-bold leading-loose text-lg">
               <p>
-                We understand the challenges parents face in finding qualified Quran teachers, 
-                especially in Western countries. That's why we've brought together a team of 
-                <strong className="text-foreground"> Ijazah-certified scholars</strong> who combine 
-                traditional Islamic knowledge with modern teaching methods.
+                We understand the struggle of Muslim parents in the West: balancing a busy life while ensuring children receive an <span className="text-emerald-700 underline decoration-gold-primary/30 decoration-wavy underline-offset-4">authentic Quranic education</span>.
               </p>
               <p>
-                Our academy serves families across the <strong className="text-foreground">United States, 
-                United Kingdom, Australia, Canada, and Europe</strong>, providing a safe, 
-                convenient, and effective way to connect your children with their Islamic heritage.
+                Our mission is to provide an elite, secure, and spiritually nurturing environment where students from <span className="text-slate-900 border-b-2 border-gold-primary/20">USA, UK, Canada, and Australia</span> can master the Holy Quran with Tajweed, from the comfort of their homes.
               </p>
             </div>
 
-            <div className="flex items-center gap-6 p-6 bg-background rounded-2xl border shadow-sm">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center flex-shrink-0">
-                <Heart className="w-8 h-8 text-white" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-lg mb-1">Our Promise to Parents</h3>
-                <p className="text-muted-foreground">
-                  We treat every student as our own child, nurturing their spiritual growth 
-                  with patience, love, and dedication.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Content */}
-          <div className="space-y-8">
-            {/* Values Grid */}
-            <div className="grid sm:grid-cols-2 gap-4">
-              {values.map((value) => (
-                <div
-                  key={value.title}
-                  className="p-6 bg-background rounded-2xl border hover:border-emerald-200 hover:shadow-lg transition-all group"
-                >
-                  <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center mb-4 group-hover:bg-emerald-500 transition-colors">
-                    <value.icon className="w-6 h-6 text-emerald-600 group-hover:text-white transition-colors" />
-                  </div>
-                  <h3 className="font-semibold mb-2">{value.title}</h3>
-                  <p className="text-sm text-muted-foreground">{value.description}</p>
+            {/* Premium Promise Card */}
+            <div className="relative group">
+              <div className="absolute -inset-1 bg-gradient-to-r from-emerald-600/20 to-gold-primary/20 rounded-[2.5rem] blur-xl opacity-50 group-hover:opacity-100 transition duration-700" />
+              <div className="relative flex items-center gap-8 p-8 bg-white rounded-[2.5rem] border border-slate-100 shadow-sm overflow-hidden">
+                <div className="w-20 h-20 rounded-[1.5rem] bg-islamic-green-main flex items-center justify-center flex-shrink-0 shadow-xl shadow-emerald-500/20">
+                  <Heart className="w-10 h-10 text-white animate-pulse" />
                 </div>
+                <div>
+                  <h3 className="font-black text-xl text-slate-800 mb-2">Our Spiritual Commitment</h3>
+                  <p className="text-slate-500 text-sm font-bold">
+                    We don't just teach reading; we nurture a lifelong love for the Quran in every student's heart.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right Content: Stats & Values Grid */}
+          <div className="relative">
+            {/* Arched Image Placeholder / Visual Branding */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="relative mb-12"
+            >
+              <div className="aspect-[4/5] bg-slate-100 rounded-[4rem] islam-arched-full overflow-hidden shadow-2xl border-8 border-white">
+                <img
+                  src="https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&q=80&w=2000"
+                  alt="Islamic Architecture"
+                  className="w-full h-full object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-1000 transform hover:scale-105"
+                />
+                {/* Floating Achievement Badge */}
+                <div className="absolute bottom-8 left-8 right-8 p-6 bg-white/90 backdrop-blur-xl rounded-3xl border border-white shadow-2xl">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-gold-primary rounded-2xl flex items-center justify-center text-white">
+                      <Sparkles className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <div className="text-xl font-black text-slate-800">15,000+</div>
+                      <div className="text-[10px] font-black uppercase tracking-widest text-slate-400">Hours of Lessons Delivered</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Decorative Elements */}
+              <div className="absolute -top-10 -right-10 w-32 h-32 bg-gold-primary/10 rounded-full blur-3xl" />
+              <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl" />
+            </motion.div>
+
+            {/* Values Grid */}
+            <div className="grid sm:grid-cols-2 gap-6">
+              {values.map((value, idx) => (
+                <motion.div
+                  key={value.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 + (idx * 0.1) }}
+                  className="p-8 bg-white rounded-3xl border border-slate-50 hover:border-emerald-100 hover:shadow-xl transition-all group hover:-translate-y-1"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center mb-6 group-hover:bg-emerald-600 group-hover:text-white transition-all transform group-hover:rotate-[15deg]">
+                    <value.icon className="w-6 h-6 text-emerald-600 transition-colors" />
+                  </div>
+                  <h3 className="font-black text-slate-800 mb-3 text-lg">{value.title}</h3>
+                  <p className="text-xs text-slate-500 font-bold leading-relaxed">{value.description}</p>
+                </motion.div>
               ))}
             </div>
-
-            {/* Achievements List */}
-            <div className="p-6 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl border border-emerald-100">
-              <h3 className="font-semibold text-lg mb-4 text-emerald-800">Why Parents Trust Us</h3>
-              <div className="grid sm:grid-cols-2 gap-3">
-                {achievements.map((item) => (
-                  <div key={item} className="flex items-center gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0" />
-                    <span className="text-sm text-emerald-900">{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
+
         </div>
       </div>
     </section>
