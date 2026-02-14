@@ -1,0 +1,424 @@
+import React, { createContext, useContext, useEffect, useState, useCallback, useRef } from 'react';
+import { User, Session } from '@supabase/supabase-js';
+import { supabase } from '@/integrations/supabase/client';
+import type { Profile, Teacher, Student, AppRole } from '@/types/database';
+
+interface AuthContextType {
+  user: User | null;
+  session: Session | null;
+  profile: Profile | null;
+  teacher: Teacher | null;
+  student: Student | null;
+  roles: AppRole[];
+  isLoading: boolean;
+  isTeacher: boolean;
+  isAdmin: boolean;
+  isStudent: boolean;
+  isParent: boolean;
+  linkedChildren: Student[];
+  activeChild: Student | null;
+  setActiveChild: (child: Student | null) => void;
+  signIn: (email: string, password: string) => Promise<{ error: Error | null }>;
+  signUp: (email: string, password: string, fullName: string, role?: 'teacher' | 'student' | 'parent') => Promise<{ error: Error | null }>;
+  signOut: () => Promise<void>;
+  refreshProfile: () => Promise<void>;
+}
+
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const [user, setUser] = useState<User | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
+  const [profile, setProfile] = useState<Profile | null>(null);
+  const [teacher, setTeacher] = useState<Teacher | null>(null);
+  const [student, setStudent] = useState<Student | null>(null);
+  const [linkedChildren, setLinkedChildren] = useState<Student[]>([]);
+  const [activeChild, setActiveChild] = useState<Student | null>(null);
+  const [roles, setRoles] = useState<AppRole[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Track fetched user to avoid duplicate fetches
+  const lastFetchedUserIdRef = useRef<string | null>(null);
+  // Track if we have successfully loaded user data
+  const hasLoadedDataRef = useRef<boolean>(false);
+  // Prevent infinite "provision" loops if a user's role records are missing.
+  const provisionAttemptedRef = useRef<Record<string, boolean>>({});
+  // Track initialization to avoid multiple concurrent starts
+  const initializationPromiseRef = useRef<Promise<void> | null>(null);
+
+  const fetchUserData = useCallback(async (
+    userId: string,
+    options?: {
+      force?: boolean;
+      roleFromMeta?: string;
+      fullNameFromMeta?: string;
+      emailFromMeta?: string;
+    }
+  ) => {
+    const force = options?.force ?? false;
+
+    // Skip if already fetched for this user (unless forced)
+    // Use ref instead of roles.length to avoid stale closure issues
+    if (!force && lastFetchedUserIdRef.current === userId && hasLoadedDataRef.current) {
+      console.log('Auth: User data already fetched successfully, skipping');
+      return null;
+    }
+
+    console.log('Auth: Fetching user data for', userId);
+    lastFetchedUserIdRef.current = userId;
+    hasLoadedDataRef.current = false; // Reset while loading
+
+    try {
+      // Fetch all data in parallel for better performance
+      const [profileResult, teacherResult, studentResult, rolesResult] = await Promise.all([
+        supabase.from('profiles').select('*').eq('user_id', userId).maybeSingle(),
+        supabase.from('teachers').select('*').eq('user_id', userId).maybeSingle(),
+        supabase.from('students').select('*').eq('user_id', userId).maybeSingle(),
+        supabase.from('user_roles').select('role').eq('user_id', userId),
+      ]);
+
+      if (profileResult.error) console.error('Auth: Profile fetch error', profileResult.error);
+      if (teacherResult.error) console.error('Auth: Teacher fetch error', teacherResult.error);
+      if (studentResult.error) console.error('Auth: Student fetch error', studentResult.error);
+      if (rolesResult.error) console.error('Auth: Roles fetch error', rolesResult.error);
+
+      // If a user exists but their role-linked rows are missing,
+      // provisioning will be handled differently to avoid blocking.
+      const roleFromMeta = options?.roleFromMeta;
+      const hasMetadataRole = roleFromMeta === 'teacher' || roleFromMeta === 'student' || roleFromMeta === 'parent';
+      const hasDatabaseRoles = rolesResult.data && rolesResult.data.length > 0;
+
+      const needsRoleProvision =
+        !hasDatabaseRoles &&
+        hasMetadataRole &&
+        !provisionAttemptedRef.current[userId];
+
+      const needsRowProvision =
+        (roleFromMeta === 'teacher' && !teacherResult.data) ||
+        ((roleFromMeta === 'student' || roleFromMeta === 'parent') && !studentResult.data);
+
+      if (needsRoleProvision || (hasMetadataRole && needsRowProvision)) {
+        if (!provisionAttemptedRef.current[userId]) {
+          provisionAttemptedRef.current[userId] = true;
+          console.log('Auth: Triggering background provisioning for', roleFromMeta);
+
+          const provisionPromise = supabase.functions.invoke('provision-user', {
+            body: {
+              role: roleFromMeta,
+              full_name: options?.fullNameFromMeta,
+              email: options?.emailFromMeta,
+            },
+          }).then(async ({ error: provisionError }) => {
+            if (!provisionError) {
+              console.log('Auth: Provisioning successful, updating data in background');
+              const [p, t, s, r] = await Promise.all([
+                supabase.from('profiles').select('*').eq('user_id', userId).maybeSingle(),
+                supabase.from('teachers').select('*').eq('user_id', userId).maybeSingle(),
+                supabase.from('students').select('*').eq('user_id', userId).maybeSingle(),
+                supabase.from('user_roles').select('role').eq('user_id', userId),
+              ]);
+
+              setProfile(p.data as Profile | null);
+              setTeacher(t.data as Teacher | null);
+              if (s.data) setStudent(s.data as Student);
+              if (r.data) setRoles(r.data.map(role => role.role as AppRole));
+            }
+          }).catch(err => console.error('Auth: Background provisioning failed', err));
+
+          if (!hasDatabaseRoles) {
+            console.log('Auth: No roles found, waiting up to 2s for provisioning');
+            await Promise.race([
+              provisionPromise,
+              new Promise(resolve => setTimeout(resolve, 2000))
+            ]);
+          }
+        }
+      }
+
+      // Set state after all checks
+      setProfile(profileResult.data as Profile | null);
+      setTeacher(teacherResult.data as Teacher | null);
+
+      if (studentResult.data) {
+        const studentData = studentResult.data as Student;
+        setStudent(studentData);
+        if (studentData.is_parent_account) {
+          try {
+            const { data: childrenData } = await supabase
+              .from('students')
+              .select('*')
+              .eq('parent_id', studentData.id);
+            if (childrenData) {
+              setLinkedChildren(childrenData as Student[]);
+              setActiveChild(childrenData[0] as Student);
+            }
+          } catch (e) {
+            console.error('Auth: Error fetching children', e);
+          }
+        } else {
+          setLinkedChildren([]);
+          setActiveChild(null);
+        }
+      } else {
+        setStudent(null);
+        setLinkedChildren([]);
+        setActiveChild(null);
+      }
+
+      // Resolve roles
+      let finalRoles: AppRole[] = rolesResult.data?.map(r => r.role as AppRole).filter(Boolean) || [];
+
+      // Supplement from metadata if necessary
+      if (roleFromMeta) {
+        let activeRole: AppRole | null = null;
+        if (roleFromMeta === 'admin') activeRole = 'admin';
+        else if (roleFromMeta === 'teacher') activeRole = 'teacher';
+        else if (roleFromMeta === 'student' || roleFromMeta === 'parent') activeRole = 'student';
+
+        if (activeRole && !finalRoles.includes(activeRole)) {
+          finalRoles.push(activeRole);
+        }
+      }
+
+      // Final fallback
+      if (finalRoles.length === 0) {
+        if (teacherResult.data) finalRoles = ['teacher'];
+        else if (studentResult.data) finalRoles = ['student'];
+      }
+
+      console.log('Auth: Roles resolved:', finalRoles);
+      setRoles(finalRoles);
+
+      // Mark as successfully loaded if we have roles
+      if (finalRoles.length > 0) {
+        hasLoadedDataRef.current = true;
+      }
+
+      return finalRoles;
+
+    } catch (error) {
+      console.error('Auth: Error in fetchUserData:', error);
+      hasLoadedDataRef.current = false;
+      return [];
+    }
+  }, []); // No dependencies - use refs for all mutable tracking
+
+  const clearUserData = useCallback(() => {
+    setProfile(null);
+    setTeacher(null);
+    setStudent(null);
+    setLinkedChildren([]);
+    setActiveChild(null);
+    setRoles([]);
+    lastFetchedUserIdRef.current = null;
+    hasLoadedDataRef.current = false;
+    provisionAttemptedRef.current = {};
+    initializationPromiseRef.current = null;
+  }, []);
+
+  const performInitialization = useCallback(async () => {
+    console.log('Auth: Initializing session...');
+    try {
+      const { data: { session: existingSession } } = await supabase.auth.getSession();
+      setSession(existingSession);
+      setUser(existingSession?.user ?? null);
+
+      if (existingSession?.user) {
+        const metadata = existingSession.user.user_metadata as { role?: string; full_name?: string };
+        const fetchedRoles = await fetchUserData(existingSession.user.id, {
+          roleFromMeta: metadata.role,
+          fullNameFromMeta: metadata.full_name,
+          emailFromMeta: existingSession.user.email ?? undefined,
+        });
+
+        // If fetch returned empty roles (and not null/skipped), the session token might be stale.
+        if (fetchedRoles && fetchedRoles.length === 0) {
+          console.warn('Auth: Initial fetch returned empty roles. Session might be stale. Refreshing...');
+          const { data: { session: refreshedSession }, error: refreshError } = await supabase.auth.refreshSession();
+
+          if (!refreshError && refreshedSession?.user) {
+            console.log('Auth: Session refreshed. Retrying user data fetch...');
+            setSession(refreshedSession);
+            setUser(refreshedSession.user);
+            // Force fetch with new session
+            await fetchUserData(refreshedSession.user.id, {
+              force: true,
+              roleFromMeta: metadata.role,
+              fullNameFromMeta: metadata.full_name,
+              emailFromMeta: refreshedSession.user.email ?? undefined,
+            });
+          } else {
+            console.error('Auth: Session refresh failed during initialization', refreshError);
+          }
+        }
+      }
+    } catch (err) {
+      console.error('Auth: Initialization error:', err);
+    } finally {
+      // Only stop loading if we successfully loaded data.
+      // If fetchUserData was skipped (due to race condition), we should count on the active fetch to handle loading state
+      // or wait for onAuthStateChange to finish.
+      if (hasLoadedDataRef.current) {
+        setIsLoading(false);
+      }
+    }
+  }, [fetchUserData]);
+
+  useEffect(() => {
+    let mounted = true;
+
+    // Safety timeout: 8 seconds to allow for provisioning
+    const safetyTimeout = setTimeout(() => {
+      if (mounted && isLoading) {
+        console.warn('Auth: Initialization safety timeout reached');
+        setIsLoading(false);
+      }
+    }, 8000);
+
+    const initialize = async () => {
+      if (!initializationPromiseRef.current) {
+        initializationPromiseRef.current = performInitialization();
+      }
+      return initializationPromiseRef.current;
+    };
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, currentSession) => {
+        if (!mounted) return;
+        console.log(`Auth: Event [${event}]`);
+
+        // Update basic session/user immediately
+        setSession(currentSession);
+        setUser(currentSession?.user ?? null);
+
+        if (event === 'SIGNED_OUT') {
+          clearUserData();
+          setIsLoading(false);
+        } else if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED' || event === 'INITIAL_SESSION') {
+          if (currentSession?.user) {
+            // Only show loading spinner if it's an initial session or explicit sign in.
+            // Avoid unmounting the app on token refreshes.
+            const shouldShowLoading = event === 'SIGNED_IN' || event === 'INITIAL_SESSION' || !hasLoadedDataRef.current;
+
+            if (shouldShowLoading) setIsLoading(true);
+
+            const metadata = currentSession.user.user_metadata as { role?: string; full_name?: string };
+            await fetchUserData(currentSession.user.id, {
+              roleFromMeta: metadata.role,
+              fullNameFromMeta: metadata.full_name,
+              emailFromMeta: currentSession.user.email ?? undefined,
+            });
+
+            if (shouldShowLoading) setIsLoading(false);
+          } else {
+            setIsLoading(false);
+          }
+        } else if (event === 'USER_UPDATED') {
+          // Handle user updates if necessary, but don't toggle loading
+          if (currentSession?.user) {
+            const metadata = currentSession.user.user_metadata as { role?: string; full_name?: string };
+            // Background update
+            fetchUserData(currentSession.user.id, {
+              roleFromMeta: metadata.role,
+              fullNameFromMeta: metadata.full_name,
+              emailFromMeta: currentSession.user.email ?? undefined,
+            });
+          }
+        }
+      }
+    );
+
+    initialize();
+
+    return () => {
+      mounted = false;
+      subscription.unsubscribe();
+      clearTimeout(safetyTimeout);
+    };
+  }, [fetchUserData, clearUserData, performInitialization, isLoading]);
+
+
+
+  const signIn = async (email: string, password: string) => {
+    lastFetchedUserIdRef.current = null; // Reset for new sign in
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    return { error: error as Error | null };
+  };
+
+  const signUp = async (email: string, password: string, fullName: string, role: 'teacher' | 'student' | 'parent' = 'student') => {
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        emailRedirectTo: window.location.origin,
+        data: {
+          full_name: fullName,
+          role: role,
+        },
+      },
+    });
+    return { error: error as Error | null };
+  };
+
+  const signOut = async () => {
+    await supabase.auth.signOut();
+    setUser(null);
+    setSession(null);
+    clearUserData();
+  };
+
+  const refreshProfile = async () => {
+    if (user) {
+      const metadata = user.user_metadata as { role?: string; full_name?: string };
+      await fetchUserData(user.id, {
+        force: true,
+        roleFromMeta: metadata.role,
+        fullNameFromMeta: metadata.full_name,
+        emailFromMeta: user.email ?? undefined,
+      });
+    }
+  };
+
+  const isAdmin = roles.includes('admin');
+  const isTeacher = roles.includes('teacher') || isAdmin;
+  const isStudent = roles.includes('student');
+  const isParent = roles.includes('parent') || (isStudent && (student?.is_parent_account ?? false));
+
+  return (
+    <AuthContext.Provider
+      value={{
+        user,
+        session,
+        profile,
+        teacher,
+        student,
+        roles,
+        isLoading,
+        isTeacher,
+        isAdmin,
+        isStudent,
+        isParent,
+        linkedChildren,
+        activeChild,
+        setActiveChild,
+        signIn,
+        signUp,
+        signOut,
+        refreshProfile,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+}
+
+export function useAuth() {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+}

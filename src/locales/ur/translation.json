@@ -1,0 +1,27 @@
+{
+    "sidebar": {
+        "dashboard": "ڈیش بورڈ",
+        "my_classes": "میری کلاسیں",
+        "lessons": "اسباق",
+        "progress": "میری پیشرفت",
+        "schedule": "شیڈول",
+        "messages": "پیغامات",
+        "find_tutors": "اساتذہ تلاش کریں",
+        "settings": "ترتیبات",
+        "help": "مدد اور تعاون"
+    },
+    "dashboard": {
+        "welcome": "السلام علیکم",
+        "stats": "فوری اعداد و شمار",
+        "upcoming_class": "آنے والی کلاس",
+        "no_sessions": "کوئی شیڈول سیشن نہیں",
+        "join_class": "کلاس میں شامل ہوں"
+    },
+    "common": {
+        "loading": "لوڈ ہو رہا ہے...",
+        "error": "کچھ غلط ہو گیا",
+        "save": "محفوظ کریں",
+        "cancel": "منسوخ کریں",
+        "submit": "جمع کرائیں"
+    }
+}

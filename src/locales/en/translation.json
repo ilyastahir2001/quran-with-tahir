@@ -1,0 +1,27 @@
+{
+    "sidebar": {
+        "dashboard": "Dashboard",
+        "my_classes": "My Classes",
+        "lessons": "Lessons",
+        "progress": "My Progress",
+        "schedule": "Schedule",
+        "messages": "Messages",
+        "find_tutors": "Find Tutors",
+        "settings": "Settings",
+        "help": "Help Support"
+    },
+    "dashboard": {
+        "welcome": "Assalamu Alaikum",
+        "stats": "Quick Stats",
+        "upcoming_class": "Upcoming Class",
+        "no_sessions": "No Scheduled Sessions",
+        "join_class": "Join Class"
+    },
+    "common": {
+        "loading": "Loading...",
+        "error": "Something went wrong",
+        "save": "Save",
+        "cancel": "Cancel",
+        "submit": "Submit"
+    }
+}

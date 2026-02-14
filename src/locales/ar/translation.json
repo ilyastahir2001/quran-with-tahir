@@ -1,0 +1,27 @@
+{
+    "sidebar": {
+        "dashboard": "لوحة التحكم",
+        "my_classes": "فصولي",
+        "lessons": "الدروس",
+        "progress": "تقدمي",
+        "schedule": "الجدول",
+        "messages": "الرسائل",
+        "find_tutors": "البحث عن معلمين",
+        "settings": "الإعدادات",
+        "help": "المساعدة والدعم"
+    },
+    "dashboard": {
+        "welcome": "السلام عليكم",
+        "stats": "إحصائيات سريعة",
+        "upcoming_class": "الحصة القادمة",
+        "no_sessions": "لا توجد حصص مجدولة",
+        "join_class": "انضم إلى الفصل"
+    },
+    "common": {
+        "loading": "جار التحميل...",
+        "error": "حدث خطأ ما",
+        "save": "حفظ",
+        "cancel": "إلغاء",
+        "submit": "إرسال"
+    }
+}

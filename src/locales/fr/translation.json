@@ -1,0 +1,27 @@
+{
+    "sidebar": {
+        "dashboard": "Tableau de Bord",
+        "my_classes": "Mes Cours",
+        "lessons": "Leçons",
+        "progress": "Mon Progrès",
+        "schedule": "Emploi du Temps",
+        "messages": "Messages",
+        "find_tutors": "Trouver des Tuteurs",
+        "settings": "Paramètres",
+        "help": "Aide"
+    },
+    "dashboard": {
+        "welcome": "Assalamu Alaikum",
+        "stats": "Statistiques Rapides",
+        "upcoming_class": "Prochain Cours",
+        "no_sessions": "Pas de sessions prévues",
+        "join_class": "Rejoindre la classe"
+    },
+    "common": {
+        "loading": "Chargement...",
+        "error": "Une erreur s'est produite",
+        "save": "Sauvegarder",
+        "cancel": "Annuler",
+        "submit": "Soumettre"
+    }
+}
