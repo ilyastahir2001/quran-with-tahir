@@ -135,11 +135,22 @@ const HolyQuran = () => {
         if (viewport) viewport.scrollTop = 0;
     }, [selectedSurah.id, viewMode, currentPage, showWordByWord]);
 
-    // SEO: Set Page Title
+    // SEO: Set Page Title and Meta Description
     useEffect(() => {
-        document.title = "Read Quran Online - Quran With Tahir";
+        document.title = "Read Quran Online - Holy Quran with Tahir";
+        
+        const metaDescription = document.querySelector('meta[name="description"]');
+        const originalDescription = metaDescription?.getAttribute('content');
+        
+        if (metaDescription) {
+            metaDescription.setAttribute('content', "Read the Holy Quran online with tajweed, translations, and word-by-word meanings. Quran with Tahir provides an immersive reading experience for students worldwide.");
+        }
+        
         return () => {
             document.title = "Quran With Tahir";
+            if (metaDescription && originalDescription) {
+                metaDescription.setAttribute('content', originalDescription);
+            }
         };
     }, []);
 
@@ -270,9 +281,26 @@ const HolyQuran = () => {
                         <div>
                             <h1 className="font-black text-lg leading-none tracking-tight">QURAN <span className="text-primary text-emerald-600">WITH TAHIR</span></h1>
                             <p className="text-[10px] uppercase font-bold tracking-[0.2em] opacity-60">Quran with Tahir</p>
+                            {/* SEO Hidden H1 for ranking */}
+                            <h1 className="sr-only">Read Holy Quran Online - Quran With Tahir</h1>
                         </div>
                     </div>
                 </div>
+
+                {/* Structured Data for SEO */}
+                <script type="application/ld+json">
+                    {JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "WebPage",
+                        "name": "Read Quran Online - Quran With Tahir",
+                        "description": "Read the Holy Quran online with translations, tajweed, and word-by-word meanings.",
+                        "breadcrumb": "Home > Read Quran",
+                        "publisher": {
+                            "@type": "Organization",
+                            "name": "Quran With Tahir"
+                        }
+                    })}
+                </script>
 
                 {/* Omni-Search for Desktop */}
                 <div className="hidden md:flex items-center gap-2 max-w-md w-full mx-8">
@@ -565,7 +593,24 @@ const HolyQuran = () => {
                                 </div>
                                 <h4 className="text-3xl font-black">Quran With Tahir</h4>
                                 <p className="opacity-60 leading-relaxed font-medium">Providing premium digital Quranic education for a modern world. Join our courses today to master Tajweed and Hifz.</p>
-                                <div className="flex items-center justify-center gap-3 pt-6">
+                                
+                                {/* SEO-Rich Content Section */}
+                                <div className="grid md:grid-cols-2 gap-8 pt-12 text-left border-t border-black/5 mt-12">
+                                    <div className="space-y-4">
+                                        <h5 className="font-black text-primary uppercase tracking-widest text-xs">Read Quran Online</h5>
+                                        <p className="text-sm opacity-60 leading-relaxed">
+                                            Looking to read the Holy Quran online? Our platform offers a premium, distraction-free reading experience. Master Tajweed, explore translations, and deepen your understanding with our word-by-word meanings.
+                                        </p>
+                                    </div>
+                                    <div className="space-y-4">
+                                        <h5 className="font-black text-primary uppercase tracking-widest text-xs">Quran Education</h5>
+                                        <p className="text-sm opacity-60 leading-relaxed">
+                                            Quran with Tahir is dedicated to providing high-quality Quranic education. Join thousands of students who are learning Quran online with qualified teachers from the comfort of their homes.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center justify-center gap-3 pt-12">
                                     <a href="https://www.quranwithtahir.com" target="_blank" rel="noopener noreferrer">
                                         <Button className="rounded-full px-8 h-12 font-bold shadow-lg shadow-primary/20 bg-emerald-600 hover:bg-emerald-700">Enroll Now</Button>
                                     </a>
