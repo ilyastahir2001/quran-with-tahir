@@ -62,7 +62,7 @@ const steps = [
 
 export function Features() {
   return (
-    <section id="features" className="py-32 bg-[#fcfaf7] relative overflow-hidden">
+    <section id="features" className="py-32 bg-[hsl(35,30%,96%)] relative overflow-hidden">
       {/* Decorative Mosque Silhouette Overlay (Subtle) */}
       <div className="absolute inset-0 bg-islamic-pattern opacity-[0.03] pointer-events-none" />
 
@@ -75,13 +75,13 @@ export function Features() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <Badge className="bg-emerald-100 text-emerald-800 border-none mb-6 px-6 py-2 font-black uppercase tracking-widest text-[10px]">
+            <Badge className="bg-emerald-100/50 text-emerald-800 border-emerald-200 mb-6 px-6 py-2 font-black uppercase tracking-widest text-[10px]">
               Our Professional Programs
             </Badge>
-            <h2 className="text-4xl lg:text-7xl font-black text-slate-900 mb-8 tracking-tighter">
-              A Plan For <span className="gradient-text-emerald">Every Student</span>
+            <h2 className="text-4xl lg:text-7xl font-black text-emerald-950 mb-8 tracking-tighter">
+              A Plan For <span className="text-emerald-600">Every Student</span>
             </h2>
-            <p className="text-xl text-slate-500 font-bold max-w-2xl mx-auto leading-relaxed">
+            <p className="text-xl text-stone-600 font-bold max-w-2xl mx-auto leading-relaxed">
               Tailored learning paths designed by world-class educators to ensure effective results for all ages.
             </p>
           </motion.div>
@@ -96,46 +96,46 @@ export function Features() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
-              className="relative group"
+              className="relative group h-full"
             >
               {program.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20">
-                  <Badge className="bg-gold-primary text-white border-4 border-[#fcfaf7] px-4 py-1 text-[10px] font-black uppercase tracking-wider shadow-lg">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20 w-max">
+                  <Badge className="bg-gold-accent text-emerald-950 border-4 border-[hsl(35,30%,96%)] px-4 py-1 text-[10px] font-black uppercase tracking-wider shadow-lg">
                     Most Popular
                   </Badge>
                 </div>
               )}
 
-              <div className="relative bg-white pt-10 pb-12 px-8 rounded-b-[2.5rem] islam-arched-full border border-slate-100 shadow-sm group-hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex flex-col h-full">
+              <div className="relative bg-white pt-12 pb-10 px-6 rounded-b-[2.5rem] islam-arched-full border border-amber-100/50 shadow-sm group-hover:shadow-[0_20px_40px_-15px_rgba(16,185,129,0.1)] transition-all duration-500 hover:-translate-y-2 flex flex-col h-full">
                 {/* Header Arch Style */}
-                <div className="absolute top-0 inset-x-0 h-4 bg-gradient-to-r from-emerald-500/10 via-gold-primary/10 to-emerald-500/10 rounded-t-full" />
+                <div className="absolute top-0 inset-x-0 h-4 bg-gradient-to-r from-emerald-500/10 via-gold-accent/10 to-emerald-500/10 rounded-t-full" />
 
                 <div className="text-center mb-8">
-                  <div className={`w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-2xl ${program.color === 'emerald' ? 'bg-emerald-50 text-emerald-600' : 'bg-orange-50 text-gold-primary'} group-hover:scale-110 transition-transform`}>
+                  <div className={`w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-2xl ${program.color === 'emerald' ? 'bg-emerald-50 text-emerald-600' : 'bg-amber-50 text-gold-accent'} group-hover:scale-110 transition-transform`}>
                     <program.icon className="w-8 h-8" />
                   </div>
-                  <h3 className="text-2xl font-black text-slate-800 mb-2">{program.title}</h3>
-                  <div className={`text-[10px] font-black uppercase tracking-widest ${program.color === 'emerald' ? 'text-emerald-500' : 'text-gold-primary'}`}>
+                  <h3 className="text-2xl font-black text-emerald-950 mb-2">{program.title}</h3>
+                  <div className={`text-[10px] font-black uppercase tracking-widest ${program.color === 'emerald' ? 'text-emerald-600' : 'text-amber-600'}`}>
                     {program.subtitle}
                   </div>
                 </div>
 
-                <p className="text-slate-500 leading-relaxed text-sm font-bold text-center mb-8">
+                <p className="text-stone-500 leading-relaxed text-sm font-bold text-center mb-8">
                   {program.description}
                 </p>
 
-                <div className="space-y-4 mb-10">
+                <div className="space-y-4 mb-10 flex-grow">
                   {program.features.map((feat, fIdx) => (
-                    <div key={fIdx} className="flex items-center gap-3">
-                      <div className="w-5 h-5 rounded-full bg-emerald-50 flex items-center justify-center border border-emerald-100 flex-shrink-0">
+                    <div key={fIdx} className="flex items-start gap-3">
+                      <div className="w-5 h-5 rounded-full bg-emerald-50 flex items-center justify-center border border-emerald-100 flex-shrink-0 mt-0.5">
                         <CheckCircle className="w-3 h-3 text-emerald-600" />
                       </div>
-                      <span className="text-xs font-bold text-slate-600">{feat}</span>
+                      <span className="text-xs font-bold text-stone-600 text-left leading-tight">{feat}</span>
                     </div>
                   ))}
                 </div>
 
-                <Button className="mt-auto w-full group-hover:bg-islamic-green-main transition-colors font-black h-12 rounded-xl" variant="outline">
+                <Button className="mt-auto w-full group-hover:bg-emerald-600 group-hover:text-white transition-colors font-black h-12 rounded-xl border-emerald-100 text-emerald-900" variant="outline">
                   Learn More <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </div>
@@ -144,20 +144,20 @@ export function Features() {
         </div>
 
         {/* The 3-Step Journey Redesigned */}
-        <div className="relative pt-24 pb-20 px-8 lg:px-20 bg-islamic-green-dark rounded-[4rem] overflow-hidden shadow-2xl border border-white/5">
+        <div className="relative pt-24 pb-20 px-8 lg:px-20 bg-emerald-900 rounded-[3rem] overflow-hidden shadow-2xl border border-emerald-800">
           <div className="absolute inset-0 bg-islamic-pattern opacity-[0.05] pointer-events-none" />
 
           <div className="relative z-10">
-            <div className="text-center mb-24">
-              <Badge className="bg-white/10 text-white/60 mb-6 px-4 py-1.5 font-black uppercase tracking-[0.2em] text-[10px] border border-white/10">
+            <div className="text-center mb-20">
+              <Badge className="bg-white/10 text-emerald-100 mb-6 px-4 py-1.5 font-black uppercase tracking-[0.2em] text-[10px] border border-white/10">
                 Smooth Professional Process
               </Badge>
-              <h2 className="text-4xl lg:text-6xl font-black text-white tracking-tighter">
+              <h2 className="text-4xl lg:text-5xl font-black text-white tracking-tighter">
                 3 Steps to <span className="text-gold-accent">Excellence</span>
               </h2>
             </div>
 
-            <div className="grid lg:grid-cols-3 gap-20">
+            <div className="grid lg:grid-cols-3 gap-16">
               {steps.map((step, idx) => (
                 <motion.div
                   key={step.id}
@@ -169,21 +169,21 @@ export function Features() {
                 >
                   {/* Connector - Enhanced */}
                   {step.id < 3 && (
-                    <div className="hidden lg:block absolute top-12 left-[80%] w-[40%] h-0.5 border-t border-dashed border-white/20 z-0" />
+                    <div className="hidden lg:block absolute top-12 left-[80%] w-[40%] h-0.5 border-t border-dashed border-emerald-700 z-0" />
                   )}
 
-                  <div className="w-24 h-24 relative mb-10">
-                    <div className="absolute inset-0 bg-gold-primary/20 blur-2xl rounded-full scale-0 group-hover:scale-150 transition-transform duration-700" />
-                    <div className="relative w-full h-full bg-white/5 backdrop-blur-xl border border-white/20 rounded-[2rem] flex items-center justify-center group-hover:bg-gold-primary group-hover:border-gold-primary transition-all duration-500 transform group-hover:-rotate-6">
-                      <step.icon className="w-10 h-10 text-gold-accent group-hover:text-white" />
-                      <div className="absolute -bottom-3 -right-3 w-10 h-10 bg-white text-emerald-900 rounded-full flex items-center justify-center font-black text-xl shadow-xl border-4 border-emerald-950">
+                  <div className="w-24 h-24 relative mb-8">
+                    <div className="absolute inset-0 bg-gold-accent/20 blur-2xl rounded-full scale-0 group-hover:scale-150 transition-transform duration-700" />
+                    <div className="relative w-full h-full bg-emerald-800/50 backdrop-blur-xl border border-emerald-700 rounded-[2rem] flex items-center justify-center group-hover:bg-gold-accent group-hover:border-gold-accent transition-all duration-500 transform group-hover:-rotate-6 shadow-inner">
+                      <step.icon className="w-10 h-10 text-gold-accent group-hover:text-emerald-900" />
+                      <div className="absolute -bottom-3 -right-3 w-10 h-10 bg-white text-emerald-900 rounded-full flex items-center justify-center font-black text-xl shadow-xl border-4 border-emerald-900">
                         {step.id}
                       </div>
                     </div>
                   </div>
 
-                  <h3 className="text-2xl font-black text-white mb-4">{step.title}</h3>
-                  <p className="text-white/50 text-sm font-bold leading-relaxed max-w-xs">
+                  <h3 className="text-2xl font-black text-white mb-3">{step.title}</h3>
+                  <p className="text-emerald-100/70 text-sm font-semibold leading-relaxed max-w-xs">
                     {step.description}
                   </p>
                 </motion.div>
