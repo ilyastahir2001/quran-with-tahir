@@ -6,195 +6,101 @@ import { motion } from 'framer-motion';
 
 const plans = [
   {
-    name: 'Introductory',
-    description: 'Perfect for trial & assessment',
-    price: 30,
-    duration: '/month',
-    sessions: '4 Classes',
-    perWeek: '1 class / week',
-    features: [
-      '30-minute 1-on-1 sessions',
-      'Foundation & Noorani Qaida',
-      'Basic Tajweed Assessment',
-      'Parent Progress Dashboard',
-      'Digital Certificate of Effort',
-    ],
+    name: 'Starter',
+    price: '$30',
+    frequency: 'Month',
+    features: ['2 Classes per week', '30 Minutes duration', 'Certified Tutors', 'Basic Progress Report'],
     popular: false,
-    cta: 'Choose Introductory',
+    color: 'emerald'
   },
   {
-    name: 'Progressive',
-    description: 'Most popular for consistent growth',
-    price: 55,
-    duration: '/month',
-    sessions: '8 Classes',
-    perWeek: '2 classes / week',
-    features: [
-      '30-minute 1-on-1 sessions',
-      'All Course Access',
-      'Weekly Detail Reports',
-      'Lesson Recordings Access',
-      'Priority Support Support',
-      '2 Monthly Makeup Classes',
-    ],
+    name: 'Recommended',
+    price: '$50',
+    frequency: 'Month',
+    features: ['3 Classes per week', '30 Minutes duration', 'Senior Scholars', 'Weekly Progress Report', 'Offline Hifz Support'],
     popular: true,
-    cta: 'Choose Progressive',
+    color: 'gold'
   },
   {
-    name: 'Elite Learning',
-    description: 'For rapid Hifz & Fluency',
-    price: 95,
-    duration: '/month',
-    sessions: '12 Classes',
-    perWeek: '3 classes / week',
-    features: [
-      '30-minute 1-on-1 sessions',
-      'Advanced Tajweed Mastery',
-      'Dedicated Revision Expert',
-      '24/7 Teacher Access',
-      'Unlimited Makeup Classes',
-      'Monthly Scholar Meetup',
-    ],
+    name: 'Intensive',
+    price: '$80',
+    frequency: 'Month',
+    features: ['5 Classes per week', '45 Minutes duration', 'Ijazah Certified Tutors', '24/7 Support Access', 'Detailed Analysis'],
     popular: false,
-    cta: 'Choose Elite',
-  },
-  {
-    name: 'Hifz Intensive',
-    description: 'Full Quran Memorization',
-    price: 150,
-    duration: '/month',
-    sessions: '20 Classes',
-    perWeek: '5 classes / week',
-    features: [
-      '45-minute deep focus sessions',
-      'Sanad/Ijazah Certified Path',
-      'Psychological Hifz Support',
-      'Custom Revision Strategy',
-      'Yearly Assessment Panel',
-      'Final Graduation Sanad',
-    ],
-    popular: false,
-    cta: 'Start Hifz Journey',
-  },
+    color: 'emerald'
+  }
 ];
 
 export function Pricing() {
-  const scrollToContact = () => {
-    document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
-    <section id="pricing" className="py-32 bg-white relative overflow-hidden">
-      {/* Premium Overlays */}
-      <div className="absolute inset-x-0 bottom-0 h-[40vh] bg-gradient-to-t from-emerald-50/30 to-transparent pointer-events-none" />
+    <section id="pricing" className="py-24 bg-[hsl(35,30%,96%)] relative overflow-hidden">
       <div className="absolute inset-0 bg-islamic-pattern opacity-[0.03] pointer-events-none" />
 
       <div className="container mx-auto px-4 relative z-10">
-        {/* Section Header */}
-        <div className="text-center max-w-4xl mx-auto mb-24">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <Badge className="bg-gold-primary/10 text-gold-primary border-gold-primary/20 mb-6 px-6 py-2 font-black uppercase tracking-widest text-[10px]">
-              Simple Transparent Pricing
-            </Badge>
-            <h2 className="text-4xl lg:text-7xl font-black text-slate-800 mb-8 tracking-tighter">
-              Invest in Eternal <span className="gradient-text-emerald">Knowledge</span>
-            </h2>
-            <div className="flex items-center justify-center gap-4 text-slate-400 mb-8">
-              <div className="flex items-center gap-1.5 text-xs font-black uppercase tracking-widest">
-                <Lock className="w-3.5 h-3.5" />
-                No Hidden Fees
-              </div>
-              <div className="w-1.5 h-1.5 rounded-full bg-slate-200" />
-              <div className="flex items-center gap-1.5 text-xs font-black uppercase tracking-widest">
-                <ShieldCheck className="w-3.5 h-3.5" />
-                Cancel Anytime
-              </div>
-            </div>
-            <p className="text-xl text-slate-500 font-bold max-w-2xl mx-auto leading-relaxed">
-              Premium 1-on-1 Quran education that fits your budget. Every plan starts with a 7-day free trial.
-            </p>
-          </motion.div>
+        <div className="text-center max-w-3xl mx-auto mb-20">
+          <Badge className="bg-emerald-100 text-emerald-800 border-none mb-4 px-6 py-2 font-black uppercase tracking-widest text-[10px]">
+            Affordable Excellence
+          </Badge>
+          <h2 className="text-4xl lg:text-6xl font-black text-emerald-950 mb-6 tracking-tight">
+            Simple, Transparent <span className="text-emerald-600">Pricing</span>
+          </h2>
+          <p className="text-xl text-stone-600 font-bold max-w-2xl mx-auto leading-relaxed">
+            Invest in your spiritual future with plans designed for every family budget.
+          </p>
         </div>
 
-        {/* Pricing Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto items-center">
           {plans.map((plan, idx) => (
             <motion.div
-              key={plan.name}
+              key={idx}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
-              className="flex"
+              className={`relative ${plan.popular ? 'md:-mt-8 md:-mb-8 z-10' : 'z-0'}`}
             >
-              <Card
-                className={`relative overflow-hidden transition-all duration-500 hover:shadow-[0_40px_100px_-20px_rgba(0,0,0,0.12)] flex flex-col w-full ${plan.popular
-                    ? 'border-[3px] border-emerald-500 shadow-2xl scale-105 z-10'
-                    : 'border border-slate-100 shadow-sm'
-                  } rounded-[3rem] group bg-white`}
-              >
-                {/* Header Arch Style */}
-                <div className={`pt-14 pb-10 px-8 text-center relative overflow-hidden ${plan.popular ? 'bg-islamic-green-dark text-white' : 'bg-[#fcfaf7] text-slate-800'
-                  } islam-arched-full`}>
-                  {plan.popular && (
-                    <div className="absolute top-4 inset-x-0 flex justify-center">
-                      <Badge className="bg-gold-primary text-white border-4 border-islamic-green-dark px-4 py-0.5 text-[8px] font-black uppercase tracking-widest">
-                        Recommended
-                      </Badge>
-                    </div>
-                  )}
-                  <h3 className="text-2xl font-black mb-1">{plan.name}</h3>
-                  <div className={`text-[10px] font-black uppercase tracking-[0.2em] ${plan.popular ? 'text-emerald-400' : 'text-slate-400'
-                    }`}>
-                    {plan.perWeek}
-                  </div>
+              {plan.popular && (
+                <div className="absolute -top-5 left-0 right-0 flex justify-center z-20">
+                  <Badge className="bg-gold-accent text-emerald-950 border-4 border-[hsl(35,30%,96%)] px-6 py-1.5 text-xs font-black uppercase tracking-wider shadow-lg">
+                    Most Parents Choose This
+                  </Badge>
                 </div>
+              )}
 
-                <CardContent className="space-y-8 pt-12 flex-grow px-8 text-center">
-                  <div className="relative inline-block">
-                    <div className="flex items-start justify-center text-slate-900">
-                      <span className="text-xl font-black mt-2 opacity-30">$</span>
-                      <span className="text-7xl font-black tracking-tighter leading-none">{plan.price}</span>
-                      <div className="flex flex-col items-start ml-1 mt-1">
-                        <span className="text-xs font-black uppercase tracking-widest text-slate-400">/USD</span>
-                        <span className="text-[10px] font-bold text-slate-400">Monthly</span>
-                      </div>
-                    </div>
+              <Card className={`h-full border-0 relative overflow-hidden flex flex-col ${plan.popular
+                  ? 'shadow-2xl scale-105 bg-white ring-4 ring-gold-accent/20'
+                  : 'shadow-lg bg-white/60 backdrop-blur-sm hover:bg-white transition-colors'
+                }`}>
+                {/* Header Pattern */}
+                <div className={`absolute top-0 inset-x-0 h-2 ${plan.popular ? 'bg-gold-accent' : 'bg-emerald-600'}`} />
+
+                <CardContent className="p-8 pb-0 flex-grow text-center">
+                  <h3 className="text-xl font-black text-emerald-900 mb-2">{plan.name}</h3>
+                  <div className="flex items-baseline justify-center gap-1 mb-6">
+                    <span className={`text-5xl font-black tracking-tight ${plan.popular ? 'text-emerald-950' : 'text-emerald-800'}`}>{plan.price}</span>
+                    <span className="text-sm font-bold text-stone-400">/{plan.frequency}</span>
                   </div>
 
-                  <div className="flex items-center justify-center gap-2">
-                    <Badge variant="secondary" className="bg-emerald-50 text-emerald-700 hover:bg-emerald-50 border-none font-black px-4 py-1 h-8 rounded-full">
-                      {plan.sessions} Total Sessions
-                    </Badge>
-                  </div>
-
-                  <ul className="space-y-4 pt-4">
+                  <div className="space-y-4 text-left">
                     {plan.features.map((feature, fIdx) => (
-                      <li key={fIdx} className="flex items-start gap-3">
-                        <div className="mt-0.5 w-5 h-5 rounded-full bg-emerald-50 flex items-center justify-center flex-shrink-0">
-                          <CheckCircle2 className="w-3 h-3 text-emerald-600" />
-                        </div>
-                        <span className="text-xs text-slate-600 font-bold text-left leading-relaxed">
+                      <div key={fIdx} className="flex items-start gap-3 group">
+                        <CheckCircle2 className={`w-5 h-5 flex-shrink-0 mt-0.5 ${plan.popular ? 'text-gold-accent' : 'text-emerald-500 group-hover:text-emerald-600'}`} />
+                        <span className={`text-sm font-bold ${plan.popular ? 'text-slate-700' : 'text-slate-500'}`}>
                           {feature}
                         </span>
-                      </li>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </CardContent>
 
-                <CardFooter className="pb-12 pt-6 px-8">
+                <CardFooter className="p-8 pt-8 mt-auto">
                   <Button
-                    onClick={scrollToContact}
-                    className={`w-full h-16 text-lg font-black transition-all duration-500 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 active:scale-95 ${plan.popular
-                        ? 'bg-islamic-green-main hover:bg-slate-900 text-white shadow-emerald-500/20'
-                        : 'bg-white border border-slate-200 text-slate-700 hover:border-emerald-500 hover:text-emerald-700 hover:bg-emerald-50/50'
+                    className={`w-full h-12 text-sm font-black rounded-xl shadow-lg transition-all ${plan.popular
+                        ? 'bg-gold-accent hover:bg-amber-400 text-emerald-950 hover:scale-[1.02]'
+                        : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200'
                       }`}
                   >
-                    {plan.cta}
+                    Get Started
                   </Button>
                 </CardFooter>
               </Card>
@@ -202,48 +108,25 @@ export function Pricing() {
           ))}
         </div>
 
-        {/* Global Security & Trust Banner */}
+        {/* Guarantee Banner */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.98 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-32 relative group"
+          className="mt-20 max-w-3xl mx-auto text-center bg-white rounded-3xl p-8 border border-emerald-100 shadow-xl relative overflow-hidden"
         >
-          <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500/10 via-gold-primary/10 to-emerald-500/10 rounded-[3.5rem] blur-2xl opacity-50" />
-
-          <div className="relative p-12 lg:p-20 bg-islamic-green-dark rounded-[4rem] overflow-hidden shadow-2xl border border-white/5">
-            <div className="absolute inset-0 bg-islamic-pattern opacity-[0.05]" />
-
-            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
-              <div className="flex flex-col md:flex-row items-center gap-10 text-center md:text-left">
-                <div className="w-28 h-28 rounded-[2.5rem] bg-white/10 backdrop-blur-3xl flex items-center justify-center border border-white/20 shadow-[-20px_20px_60px_rgba(0,0,0,0.3)] transform rotate-3 hover:rotate-0 transition-transform duration-700">
-                  <ShieldCheck className="w-14 h-14 text-gold-accent" />
-                </div>
-                <div>
-                  <h3 className="text-3xl lg:text-4xl font-black text-white tracking-tighter mb-4">
-                    100% Satisfaction <span className="text-gold-accent">Guarantee</span>
-                  </h3>
-                  <p className="text-white/60 max-w-xl text-lg font-bold leading-relaxed">
-                    Not satisfied with your first 2 lessons? We will refund your entire payment immediately, no questions asked. Your trust is our priority.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex flex-col items-center gap-4">
-                <Button
-                  onClick={scrollToContact}
-                  className="h-16 px-12 bg-gold-primary hover:bg-white hover:text-emerald-950 text-white font-black text-xl rounded-2xl transition-all transform hover:scale-105 shadow-[0_20px_50px_rgba(217,119,6,0.3)]"
-                >
-                  Book 07 Days Free Trial
-                </Button>
-                <div className="flex items-center gap-2 text-white/40 text-[10px] uppercase font-black tracking-widest">
-                  <Globe className="w-3.5 h-3.5" />
-                  Secured by International Payment Gateways
-                </div>
-              </div>
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 via-gold-accent to-emerald-400" />
+          <div className="flex flex-col md:flex-row items-center justify-center gap-6">
+            <div className="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center flex-shrink-0">
+              <ShieldCheck className="w-8 h-8 text-emerald-600" />
+            </div>
+            <div className="text-left">
+              <h4 className="text-xl font-black text-emerald-950 mb-1">100% Satisfaction Guarantee</h4>
+              <p className="text-stone-500 text-sm font-medium">If you are not satisfied with your first week of classes, we will refund your fee. No questions asked.</p>
             </div>
           </div>
         </motion.div>
+
       </div>
     </section>
   );
