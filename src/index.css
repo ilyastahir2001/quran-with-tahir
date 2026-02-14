@@ -22,13 +22,13 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
 
-    /* Primary - Professional Blue */
-    --primary: 221 83% 43%;
+    /* Primary - Original Emerald Green */
+    --primary: 162 64% 28%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary */
-    --secondary: 217 35% 95%;
-    --secondary-foreground: 222 47% 11%;
+    /* Secondary - Fresh Mint */
+    --secondary: 158 35% 95%;
+    --secondary-foreground: 162 64% 15%;
 
     /* Muted */
     --muted: 210 20% 96%;
@@ -45,15 +45,15 @@
     /* Border & Input */
     --border: 214 32% 91%;
     --input: 214 32% 91%;
-    --ring: 36 67% 53%;
+    --ring: 162 64% 28%;
 
     /* Radius */
     --radius: 0.5rem;
 
-    /* Islamic Premium Palette */
-    --islamic-blue-dark: 224 71% 15%;
-    --islamic-blue-main: 221 83% 53%;
-    --islamic-blue-light: 217 91% 60%;
+    /* Islamic Premium Palette - Green & Gold */
+    --islamic-green-dark: 162 64% 15%;
+    --islamic-green-main: 162 64% 28%;
+    --islamic-green-light: 158 35% 95%;
     --gold-primary: 36 67% 53%;
     --gold-accent: 45 100% 51%;
     --cream-light: 40 33% 98%;
@@ -61,12 +61,12 @@
     /* Sidebar - Elegant Dark */
     --sidebar-background: 222 47% 11%;
     --sidebar-foreground: 220 20% 90%;
-    --sidebar-primary: 221 83% 53%;
+    --sidebar-primary: 162 64% 28%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 222 40% 18%;
     --sidebar-accent-foreground: 220 20% 95%;
     --sidebar-border: 222 30% 20%;
-    --sidebar-ring: 221 83% 53%;
+    --sidebar-ring: 162 64% 28%;
   }
 
   .dark {
@@ -76,8 +76,8 @@
     --card-foreground: 220 20% 95%;
     --popover: 222 40% 12%;
     --popover-foreground: 220 20% 95%;
-    --primary: 217 91% 60%;
-    --primary-foreground: 222 47% 11%;
+    --primary: 162 64% 38%;
+    --primary-foreground: 0 0% 100%;
     --secondary: 222 30% 18%;
     --secondary-foreground: 220 20% 95%;
     --muted: 222 30% 18%;
@@ -88,7 +88,7 @@
     --destructive-foreground: 220 20% 95%;
     --border: 222 30% 22%;
     --input: 222 30% 22%;
-    --ring: 36 67% 53%;
+    --ring: 162 64% 38%;
   }
 }
 
@@ -120,7 +120,7 @@
 
   /* Geometric Pattern Overlay */
   .bg-islamic-pattern {
-    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 20l10-10H10l10 10zm0 0l10 10H10l10-10zm0 0l-10-10v20l10-10zm0 0l10-10v20l10-10z' fill='%23ffffff' fill-opacity='0.03'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 20l10-10H10l10 10zm0 0l10 10H10l10-10zm0 0l-10-10v20l10-10zm0 0l10-10v20l10-10z' fill='%2310b981' fill-opacity='0.03'/%3E%3C/svg%3E");
   }
 
   /* Status Pills */
@@ -134,8 +134,8 @@
     @apply bg-background/80 backdrop-blur-sm;
   }
 
-  .gradient-text-gold {
-    @apply bg-gradient-to-r from-[hsl(var(--gold-primary))] to-[hsl(var(--gold-accent))] bg-clip-text text-transparent;
+  .gradient-text-emerald {
+    @apply bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--gold-primary))] bg-clip-text text-transparent;
   }
 
   .quran-verse-text {

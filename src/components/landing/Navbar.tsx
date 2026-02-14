@@ -60,7 +60,7 @@ export function Navbar() {
                 <Link
                   key={link.href}
                   to={link.href}
-                  className="text-sm font-bold text-blue-700 hover:text-gold-primary transition-colors flex items-center gap-2"
+                  className="text-sm font-bold text-emerald-700 hover:text-gold-primary transition-colors flex items-center gap-2"
                 >
                   <BookOpen className="w-4 h-4" />
                   {link.label}
@@ -70,8 +70,8 @@ export function Navbar() {
                   key={link.href}
                   onClick={() => scrollToSection(link.href)}
                   className={cn(
-                    "text-sm font-medium transition-colors",
-                    isScrolled ? "text-slate-600 hover:text-blue-700" : "text-white/80 hover:text-white"
+                    "text-sm font-bold transition-colors",
+                    isScrolled ? "text-slate-600 hover:text-emerald-700" : "text-emerald-900/80 hover:text-emerald-700"
                   )}
                 >
                   {link.label}
@@ -85,8 +85,8 @@ export function Navbar() {
             <a
               href="tel:+923110267879"
               className={cn(
-                "flex items-center gap-2 text-sm transition-colors",
-                isScrolled ? "text-slate-500 hover:text-blue-700" : "text-white/60 hover:text-white"
+                "flex items-center gap-2 text-sm transition-colors font-bold",
+                isScrolled ? "text-slate-500 hover:text-emerald-700" : "text-emerald-900/60 hover:text-emerald-700"
               )}
             >
               <Phone className="w-4 h-4" />
@@ -94,14 +94,15 @@ export function Navbar() {
             </a>
             <Link to="/login">
               <Button variant="outline" size="sm" className={cn(
-                isScrolled ? "border-slate-200" : "border-white/20 text-white hover:bg-white/10"
+                "font-bold",
+                isScrolled ? "border-slate-200" : "border-emerald-200 text-emerald-800 hover:bg-emerald-50"
               )}>
                 Login
               </Button>
             </Link>
             <Button
               onClick={() => scrollToSection('#contact')}
-              className="bg-gold-primary hover:bg-gold-accent text-white shadow-lg"
+              className="bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg font-bold"
             >
               Free Trial Class
             </Button>
@@ -112,7 +113,7 @@ export function Navbar() {
             onClick={() => setIsOpen(!isOpen)}
             className={cn(
               "lg:hidden p-2 rounded-lg transition-colors",
-              isScrolled ? "hover:bg-slate-100 text-slate-800" : "hover:bg-white/10 text-white"
+              isScrolled ? "hover:bg-slate-100 text-slate-800" : "hover:bg-emerald-100 text-emerald-900"
             )}
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -128,7 +129,7 @@ export function Navbar() {
                   <Link
                     key={link.href}
                     to={link.href}
-                    className="py-3 text-lg font-bold text-blue-700 border-b border-slate-100 flex items-center gap-3"
+                    className="py-3 text-lg font-bold text-emerald-700 border-b border-slate-100 flex items-center gap-3"
                     onClick={() => setIsOpen(false)}
                   >
                     <BookOpen className="w-5 h-5" />
@@ -138,7 +139,7 @@ export function Navbar() {
                   <button
                     key={link.href}
                     onClick={() => scrollToSection(link.href)}
-                    className="text-left py-2 text-slate-600 hover:text-blue-700 transition-colors border-b border-slate-50"
+                    className="text-left py-2 text-slate-600 hover:text-emerald-700 transition-colors border-b border-slate-50 font-bold"
                   >
                     {link.label}
                   </button>
@@ -147,19 +148,19 @@ export function Navbar() {
               <div className="flex flex-col gap-3 pt-4">
                 <a
                   href="tel:+923110267879"
-                  className="flex items-center gap-2 text-slate-500"
+                  className="flex items-center gap-2 text-slate-500 font-bold"
                 >
                   <Phone className="w-4 h-4" />
                   <span>+92 311 026 7879</span>
                 </a>
                 <Link to="/login" className="w-full" onClick={() => setIsOpen(false)}>
-                  <Button variant="outline" className="w-full border-slate-200">
+                  <Button variant="outline" className="w-full border-slate-200 font-bold">
                     Login
                   </Button>
                 </Link>
                 <Button
                   onClick={() => scrollToSection('#contact')}
-                  className="w-full bg-blue-700 hover:bg-blue-800 text-white"
+                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold"
                 >
                   Free Trial Class
                 </Button>
