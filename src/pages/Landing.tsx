@@ -12,6 +12,7 @@ import { CallToAction } from '@/components/landing/CallToAction';
 export default function Landing() {
   return (
     <div className="min-h-screen bg-background">
+      {/* Starting Landing Page Changes - Dev Branch */}
       <Navbar />
       <main>
         <Hero />
