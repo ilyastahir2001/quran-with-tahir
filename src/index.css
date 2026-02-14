@@ -58,6 +58,15 @@
     --gold-accent: 45 100% 51%;
     --cream-light: 40 33% 98%;
 
+    /* Premium Gradients (HSL) */
+    --grad-emerald: linear-gradient(135deg, hsl(162 64% 28%) 0%, hsl(162 64% 15%) 100%);
+    --grad-gold: linear-gradient(135deg, hsl(36 67% 53%) 0%, hsl(45 100% 51%) 100%);
+    --grad-surface: linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 100%);
+    
+    /* Security & Trust Glows */
+    --glow-safe: 0 0 20px rgba(16, 185, 129, 0.15);
+    --glow-gold: 0 0 25px rgba(217, 119, 6, 0.2);
+
     /* Sidebar - Elegant Dark */
     --sidebar-background: 222 47% 11%;
     --sidebar-foreground: 220 20% 90%;
@@ -108,7 +117,7 @@
     border-top-right-radius: 50% 20%;
   }
 
-  .islamic-arched-full {
+  .islamic-arched-full, .islam-arched-full {
     border-top-left-radius: 50% 100%;
     border-top-right-radius: 50% 100%;
   }
@@ -131,11 +140,38 @@
 
 @layer utilities {
   .glass {
-    @apply bg-background/80 backdrop-blur-sm;
+    @apply bg-background/80 backdrop-blur-md border border-white/20;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+  }
+
+  .glass-dark {
+    @apply bg-slate-900/40 backdrop-blur-lg border border-white/10;
   }
 
   .gradient-text-emerald {
     @apply bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--gold-primary))] bg-clip-text text-transparent;
+  }
+
+  .gradient-text-gold {
+    @apply bg-gradient-to-r from-[hsl(var(--gold-primary))] to-[hsl(var(--gold-accent))] bg-clip-text text-transparent;
+  }
+
+  .premium-shadow {
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
+  }
+
+  .premium-shadow-hover {
+    @apply transition-all duration-500;
+  }
+
+  .premium-shadow-hover:hover {
+    box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+  }
+
+  .mosque-silhouette {
+    -webkit-mask-image: linear-gradient(to top, black 50%, transparent 100%);
+    mask-image: linear-gradient(to top, black 50%, transparent 100%);
   }
 
   .quran-verse-text {
