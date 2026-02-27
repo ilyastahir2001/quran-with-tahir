@@ -28,25 +28,28 @@ export function VideoTile({
   useEffect(() => {
     if (!participant) return;
 
+    const videoElement = videoRef.current;
+    const audioElement = audioRef.current;
+
     const videoTrack = participant.tracks?.video;
     const audioTrack = participant.tracks?.audio;
 
     // Set up video
-    if (videoRef.current && videoTrack?.persistentTrack) {
-      videoRef.current.srcObject = new MediaStream([videoTrack.persistentTrack]);
+    if (videoElement && videoTrack?.persistentTrack) {
+      videoElement.srcObject = new MediaStream([videoTrack.persistentTrack]);
     }
 
     // Set up audio (only for remote participants)
-    if (!isLocal && audioRef.current && audioTrack?.persistentTrack) {
-      audioRef.current.srcObject = new MediaStream([audioTrack.persistentTrack]);
+    if (!isLocal && audioElement && audioTrack?.persistentTrack) {
+      audioElement.srcObject = new MediaStream([audioTrack.persistentTrack]);
     }
 
     return () => {
-      if (videoRef.current) {
-        videoRef.current.srcObject = null;
+      if (videoElement) {
+        videoElement.srcObject = null;
       }
-      if (audioRef.current) {
-        audioRef.current.srcObject = null;
+      if (audioElement) {
+        audioElement.srcObject = null;
       }
     };
   }, [participant, isLocal]);
