@@ -62,9 +62,9 @@ const steps = [
 
 export function Features() {
   return (
-    <section id="features" className="py-32 bg-[hsl(35,30%,96%)] relative overflow-hidden">
+    <section id="features" className="py-32 bg-[hsl(var(--cream-light))] relative overflow-hidden">
       {/* Decorative Mosque Silhouette Overlay (Subtle) */}
-      <div className="absolute inset-0 bg-islamic-pattern opacity-[0.03] pointer-events-none" />
+      <div className="absolute inset-0 bg-islamic-pattern opacity-10 pointer-events-none" />
 
       <div className="container mx-auto px-4 relative z-10">
 
@@ -75,13 +75,13 @@ export function Features() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <Badge className="bg-emerald-100/50 text-emerald-800 border-emerald-200 mb-6 px-6 py-2 font-black uppercase tracking-widest text-[10px]">
+            <Badge className="bg-gold-primary/20 text-gold-accent border-gold-primary/30 mb-6 px-6 py-2 font-black uppercase tracking-widest text-[10px]">
               Our Professional Programs
             </Badge>
-            <h2 className="text-4xl lg:text-7xl font-black text-emerald-950 mb-8 tracking-tighter">
-              A Plan For <span className="text-emerald-600">Every Student</span>
+            <h2 className="text-4xl lg:text-7xl font-black text-[hsl(var(--islamic-blue-dark))] mb-8 tracking-tighter">
+              A Plan For <span className="text-gold-accent">Every Student</span>
             </h2>
-            <p className="text-xl text-stone-600 font-bold max-w-2xl mx-auto leading-relaxed">
+            <p className="text-xl text-slate-600 font-bold max-w-2xl mx-auto leading-relaxed">
               Tailored learning paths designed by world-class educators to ensure effective results for all ages.
             </p>
           </motion.div>
@@ -111,10 +111,10 @@ export function Features() {
                 {/* Standard Card Header */}
 
                 <div className="text-center mb-8">
-                  <div className={`w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-2xl ${program.color === 'emerald' ? 'bg-emerald-50 text-emerald-600' : 'bg-amber-50 text-gold-accent'} group-hover:scale-110 transition-transform`}>
-                    <program.icon className="w-8 h-8" />
+                  <div className={`w-20 h-20 mx-auto mb-6 flex items-center justify-center octagonal-shape border-2 ${program.color === 'emerald' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 'bg-amber-50 text-gold-accent border-amber-100'} group-hover:scale-110 group-hover:bg-gold-accent group-hover:text-white group-hover:border-gold-accent transition-all duration-500 shadow-lg`}>
+                    <program.icon className="w-10 h-10" />
                   </div>
-                  <h3 className="text-2xl font-black text-emerald-950 mb-2">{program.title}</h3>
+                  <h3 className="text-2xl font-black text-[hsl(var(--islamic-blue-dark))] mb-2">{program.title}</h3>
                   <div className={`text-[10px] font-black uppercase tracking-widest ${program.color === 'emerald' ? 'text-emerald-600' : 'text-amber-600'}`}>
                     {program.subtitle}
                   </div>

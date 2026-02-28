@@ -10,9 +10,9 @@
 
 @layer base {
   :root {
-    /* Core Background & Text - Standard Theme */
-    --background: 0 0% 100%; /* Pure White */
-    --foreground: 222 47% 11%; /* Standard Slate-900 */
+    /* Core Background & Text */
+    --background: 220 20% 97%;
+    --foreground: 222 47% 11%;
 
     /* Card surfaces */
     --card: 0 0% 100%;
@@ -22,41 +22,40 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
 
-    /* Primary - Standard Emerald (Live Site Green) */
-    --primary: 159 64% 43%; /* Tailwind Emerald-600 */
+    /* Primary - Professional Islamic Blue */
+    --primary: 221 83% 43%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary - Gold/Sand */
-    --secondary: 45 60% 94%; /* Pale gold background */
-    --secondary-foreground: 165 90% 15%;
+    /* Secondary */
+    --secondary: 217 35% 95%;
+    --secondary-foreground: 222 47% 11%;
 
     /* Muted */
-    --muted: 40 15% 92%;
-    --muted-foreground: 165 20% 40%;
+    --muted: 210 20% 96%;
+    --muted-foreground: 215 16% 47%;
 
-    /* Accent - Gold */
-    --accent: 45 90% 50%; /* Pure Gold */
-    --accent-foreground: 165 90% 10%;
+    /* Accent - Elite Gold */
+    --accent: 36 67% 53%;
+    --accent-foreground: 0 0% 100%;
 
     /* Destructive */
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 40 30% 98%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
 
     /* Border & Input */
-    --border: 165 30% 85%; /* Soft Green-Grey */
-    --input: 165 30% 85%;
-    --ring: 165 85% 25%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 36 67% 53%;
 
     /* Custom Radius */
     --radius: 0.75rem;
 
-    /* Custom Gradients - Will be used in components */
-    --gradient-warm-radiant: radial-gradient(circle at top left, hsl(45 90% 90% / 0.4), transparent 40%), radial-gradient(circle at bottom right, hsl(165 85% 90% / 0.4), transparent 40%);
-
-    /* Islamic Premium Palette - Green & Gold */
+    /* Islamic Premium Palette - Green, Blue & Gold */
+    --islamic-blue-dark: 224 71% 15%;
+    --islamic-blue-main: 221 83% 53%;
+    --islamic-blue-light: 217 91% 60%;
     --islamic-green-dark: 162 64% 15%;
     --islamic-green-main: 162 64% 28%;
-    --islamic-green-light: 158 35% 95%;
     --gold-primary: 36 67% 53%;
     --gold-accent: 45 100% 51%;
     --cream-light: 40 33% 98%;
@@ -64,7 +63,7 @@
     /* Premium Gradients (HSL) */
     --grad-emerald: linear-gradient(135deg, hsl(162 64% 28%) 0%, hsl(162 64% 15%) 100%);
     --grad-gold: linear-gradient(135deg, hsl(36 67% 53%) 0%, hsl(45 100% 51%) 100%);
-    --grad-surface: linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 100%);
+    --grad-blue: linear-gradient(135deg, hsl(221 83% 53%) 0%, hsl(224 71% 15%) 100%);
     
     /* Security & Trust Glows */
     --glow-safe: 0 0 20px rgba(16, 185, 129, 0.15);
@@ -73,12 +72,12 @@
     /* Sidebar - Elegant Dark */
     --sidebar-background: 222 47% 11%;
     --sidebar-foreground: 220 20% 90%;
-    --sidebar-primary: 162 64% 28%;
+    --sidebar-primary: 221 83% 53%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 222 40% 18%;
     --sidebar-accent-foreground: 220 20% 95%;
     --sidebar-border: 222 30% 20%;
-    --sidebar-ring: 162 64% 28%;
+    --sidebar-ring: 221 83% 53%;
   }
 
   .dark {
@@ -88,8 +87,8 @@
     --card-foreground: 220 20% 95%;
     --popover: 222 40% 12%;
     --popover-foreground: 220 20% 95%;
-    --primary: 162 64% 38%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 222 47% 11%;
     --secondary: 222 30% 18%;
     --secondary-foreground: 220 20% 95%;
     --muted: 222 30% 18%;
@@ -100,7 +99,7 @@
     --destructive-foreground: 220 20% 95%;
     --border: 222 30% 22%;
     --input: 222 30% 22%;
-    --ring: 162 64% 38%;
+    --ring: 36 67% 53%;
   }
 }
 
@@ -120,7 +119,7 @@
     border-top-right-radius: 50% 20%;
   }
 
-  .islamic-arched-full, .islam-arched-full {
+  .islamic-arched-full {
     border-top-left-radius: 50% 100%;
     border-top-right-radius: 50% 100%;
   }
@@ -132,7 +131,7 @@
 
   /* Geometric Pattern Overlay */
   .bg-islamic-pattern {
-    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 20l10-10H10l10 10zm0 0l10 10H10l10-10zm0 0l-10-10v20l10-10zm0 0l10-10v20l10-10z' fill='%2310b981' fill-opacity='0.03'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 20l10-10H10l10 10zm0 0l10 10H10l10-10zm0 0l-10-10v20l10-10zm0 0l10-10v20l10-10z' fill='%23ffffff' fill-opacity='0.03'/%3E%3C/svg%3E");
   }
 
   /* Status Pills */
@@ -143,38 +142,12 @@
 
 @layer utilities {
   .glass {
-    @apply bg-background/80 backdrop-blur-md border border-white/20;
+    @apply bg-background/80 backdrop-blur-sm border border-white/20;
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
-  }
-
-  .glass-dark {
-    @apply bg-slate-900/40 backdrop-blur-lg border border-white/10;
-  }
-
-  .gradient-text-emerald {
-    @apply bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--gold-primary))] bg-clip-text text-transparent;
   }
 
   .gradient-text-gold {
     @apply bg-gradient-to-r from-[hsl(var(--gold-primary))] to-[hsl(var(--gold-accent))] bg-clip-text text-transparent;
-  }
-
-  .premium-shadow {
-    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
-  }
-
-  .premium-shadow-hover {
-    @apply transition-all duration-500;
-  }
-
-  .premium-shadow-hover:hover {
-    box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.15);
-    transform: translateY(-5px);
-  }
-
-  .mosque-silhouette {
-    -webkit-mask-image: linear-gradient(to top, black 50%, transparent 100%);
-    mask-image: linear-gradient(to top, black 50%, transparent 100%);
   }
 
   .quran-verse-text {
@@ -182,5 +155,10 @@
     line-height: 2.2;
     text-align: right;
     direction: rtl;
+  }
+
+  .mosque-silhouette {
+    -webkit-mask-image: linear-gradient(to top, black 50%, transparent 100%);
+    mask-image: linear-gradient(to top, black 50%, transparent 100%);
   }
 }

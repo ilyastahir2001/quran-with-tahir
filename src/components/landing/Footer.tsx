@@ -4,12 +4,15 @@ import { Input } from '@/components/ui/input';
 
 export function Footer() {
   return (
-    <footer className="bg-emerald-900 text-emerald-100 pt-20 pb-10 relative overflow-hidden">
+    <footer className="bg-[hsl(var(--islamic-blue-dark))] text-emerald-100 pt-20 pb-10 relative overflow-hidden">
+      {/* Mosque Silhouette Overlay */}
+      <div className="absolute bottom-0 left-0 w-full h-64 bg-[url('https://images.unsplash.com/photo-1542810634-71277d95dcbb?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-bottom opacity-10 mosque-silhouette pointer-events-none" />
+
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5 pointer-events-none">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-gold-accent rounded-full blur-[150px]" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-emerald-400 rounded-full blur-[150px]" />
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')]" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-gold-primary rounded-full blur-[150px]" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-islamic-blue-main rounded-full blur-[150px]" />
+        <div className="absolute inset-0 bg-islamic-pattern" />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -18,10 +21,10 @@ export function Footer() {
           {/* Brand Column */}
           <div className="space-y-6">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 bg-gold-accent rounded-lg flex items-center justify-center">
-                <span className="text-emerald-950 font-black text-xl">QT</span>
+              <div className="w-12 h-12 bg-gold-primary/20 text-gold-accent rounded-xl flex items-center justify-center octagonal-shape border border-gold-primary/30">
+                <span className="text-white font-black text-xl">QT</span>
               </div>
-              <span className="text-2xl font-black text-white tracking-tight">Quran With Tahir</span>
+              <span className="text-2xl font-black text-white tracking-tighter">Quran With Tahir</span>
             </div>
             <p className="text-emerald-200/80 leading-relaxed text-sm">
               Connecting hearts to the Holy Quran through expert online education. Join our global community of learners today.
