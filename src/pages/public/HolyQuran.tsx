@@ -135,6 +135,25 @@ const HolyQuran = () => {
         if (viewport) viewport.scrollTop = 0;
     }, [selectedSurah.id, viewMode, currentPage, showWordByWord]);
 
+    // SEO: Set Page Title and Meta Description
+    useEffect(() => {
+        document.title = "Read Quran Online - Holy Quran with Tahir";
+
+        const metaDescription = document.querySelector('meta[name="description"]');
+        const originalDescription = metaDescription?.getAttribute('content');
+
+        if (metaDescription) {
+            metaDescription.setAttribute('content', "Read the Holy Quran online with tajweed, translations, and word-by-word meanings. Quran with Tahir provides an immersive reading experience for students worldwide.");
+        }
+
+        return () => {
+            document.title = "Quran With Tahir";
+            if (metaDescription && originalDescription) {
+                metaDescription.setAttribute('content', originalDescription);
+            }
+        };
+    }, []);
+
     // Global search and Jump to Ayah
     const handleSearch = (query: string) => {
         setSearchQuery(query);
@@ -262,9 +281,26 @@ const HolyQuran = () => {
                         <div>
                             <h1 className="font-black text-lg leading-none tracking-tight">QURAN <span className="text-primary text-emerald-600">WITH TAHIR</span></h1>
                             <p className="text-[10px] uppercase font-bold tracking-[0.2em] opacity-60">Quran with Tahir</p>
+                            {/* SEO Hidden H1 for ranking */}
+                            <h1 className="sr-only">Read Holy Quran Online - Quran With Tahir</h1>
                         </div>
                     </div>
                 </div>
+
+                {/* Structured Data for SEO */}
+                <script type="application/ld+json">
+                    {JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "WebPage",
+                        "name": "Read Quran Online - Quran With Tahir",
+                        "description": "Read the Holy Quran online with translations, tajweed, and word-by-word meanings.",
+                        "breadcrumb": "Home > Read Quran",
+                        "publisher": {
+                            "@type": "Organization",
+                            "name": "Quran With Tahir"
+                        }
+                    })}
+                </script>
 
                 {/* Omni-Search for Desktop */}
                 <div className="hidden md:flex items-center gap-2 max-w-md w-full mx-8">

@@ -1,122 +1,88 @@
-import { Badge } from '@/components/ui/badge';
-import { Video, Clock, Users, Shield, Award, Headphones, BookOpen, Sparkles } from 'lucide-react';
+import { Badge } from "@/components/ui/badge";
+import { motion } from "framer-motion";
+import { ShieldCheck, UserCheck, Globe, Clock, CheckCircle2, Award, Zap, Heart } from "lucide-react";
 
-const reasons = [
+const features = [
   {
-    icon: Video,
-    title: 'Live 1-on-1 Classes',
-    description: 'Real-time interactive sessions with dedicated teachers, not pre-recorded videos.',
+    icon: ShieldCheck,
+    title: "100% Vetted Scholars",
+    description: "Every tutor undergoes a rigorous background check and Quranic proficiency exam before joining us."
+  },
+  {
+    icon: UserCheck,
+    title: "Personalized 1-on-1",
+    description: "Focused individual attention ensures faster progress and better retention than group classes."
   },
   {
     icon: Clock,
-    title: 'Flexible Scheduling',
-    description: 'Book classes at times that suit your family. Early morning to late night - we adapt to you.',
-  },
-  {
-    icon: Users,
-    title: 'Male & Female Teachers',
-    description: 'Choose a teacher that makes your child most comfortable. Both options available.',
-  },
-  {
-    icon: Shield,
-    title: 'Parent Dashboard',
-    description: 'Monitor your child\'s progress, view class recordings, and track attendance anytime.',
+    title: "Flexible Schedule",
+    description: "Learn at your own pace, anytime, anywhere. Reschedule classes easily to fit your busy life."
   },
   {
     icon: Award,
-    title: 'Ijazah-Certified',
-    description: 'Learn from teachers with authentic chains of narration directly to the Prophet ﷺ.',
+    title: "Ijazah Certification",
+    description: "Earn an official Ijazah upon completion, connecting your recitation back to the Prophet (PBUH)."
   },
   {
-    icon: Headphones,
-    title: '24/7 Support',
-    description: 'Questions? Concerns? Our support team is always ready to help via WhatsApp or email.',
+    icon: Zap,
+    title: "Interactive Learning",
+    description: "Modern digital whiteboard tools and screen sharing make online lessons engaging and effective."
   },
   {
-    icon: BookOpen,
-    title: 'Structured Curriculum',
-    description: 'Research-backed teaching methods designed for effective and enjoyable learning.',
-  },
-  {
-    icon: Sparkles,
-    title: 'Free Trial Class',
-    description: 'Experience our teaching quality risk-free. No payment required for your first class.',
-  },
+    icon: Heart,
+    title: "Safe Environment",
+    description: "A secure, monitored platform designed specifically for women and children's peace of mind."
+  }
 ];
 
 export function WhyChooseUs() {
   return (
-    <section className="py-24 bg-gradient-to-b from-background to-emerald-50/50">
-      <div className="container mx-auto px-4">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <Badge className="bg-emerald-100 text-emerald-700 hover:bg-emerald-100 mb-4">
-            Why Choose Us
+    <section className="py-24 bg-slate-50 relative overflow-hidden" id="why-choose-us">
+      {/* Abstract Background Patterns */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-200 rounded-full blur-[100px]" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-gold-accent rounded-full blur-[100px]" />
+        <div className="absolute inset-0 bg-islamic-pattern" />
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="text-center max-w-3xl mx-auto mb-20">
+          <Badge variant="outline" className="mb-4 border-emerald-200 text-emerald-700 px-4 py-1.5 text-sm font-bold tracking-widest uppercase bg-emerald-50">
+            Why Choose Quran With Tahir?
           </Badge>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            The <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-              Quran With Tahir
-            </span> Difference
+          <h2 className="text-4xl lg:text-5xl font-black text-slate-900 mb-6 tracking-tight">
+            Experience the <span className="text-emerald-600">Difference</span>
           </h2>
-          <p className="text-lg text-muted-foreground">
-            We combine traditional Islamic scholarship with modern technology to deliver 
-            the best Quran learning experience for your family.
+          <p className="text-slate-600 text-lg leading-relaxed font-medium">
+            We don't just teach Quran; we build a lifelong connection with the Divine through
+            <span className="text-emerald-700 font-bold mx-1">expert mentorship</span>
+            and a
+            <span className="text-emerald-700 font-bold mx-1">world-class curriculum</span>.
           </p>
         </div>
 
-        {/* Reasons Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {reasons.map((reason, index) => (
-            <div
-              key={reason.title}
-              className="relative p-6 bg-background rounded-2xl border hover:border-emerald-200 hover:shadow-xl transition-all duration-300 group"
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {features.map((feature, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              whileHover={{ y: -10 }}
+              className="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-lg hover:shadow-xl hover:border-emerald-200 transition-all duration-300 group"
             >
-              {/* Number Badge */}
-              <div className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-sm font-bold text-emerald-600">
-                {index + 1}
+              <div className="mb-6 inline-flex p-4 rounded-2xl bg-emerald-50 border border-emerald-100 group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300">
+                <feature.icon className="w-8 h-8 text-emerald-600 group-hover:text-white transition-colors" />
               </div>
-              
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-100 to-teal-100 flex items-center justify-center mb-4 group-hover:from-emerald-500 group-hover:to-teal-600 transition-colors duration-300">
-                <reason.icon className="w-7 h-7 text-emerald-600 group-hover:text-white transition-colors duration-300" />
-              </div>
-              
-              <h3 className="font-semibold text-lg mb-2 group-hover:text-emerald-600 transition-colors">
-                {reason.title}
+              <h3 className="text-xl font-black text-slate-900 mb-4">
+                {feature.title}
               </h3>
-              <p className="text-sm text-muted-foreground">
-                {reason.description}
+              <p className="text-slate-500 leading-relaxed text-sm font-semibold">
+                {feature.description}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
-
-        {/* Trust Banner */}
-        <div className="mt-16 p-8 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-3xl text-white text-center">
-          <h3 className="text-2xl font-bold mb-2">Join 1000+ Satisfied Families</h3>
-          <p className="text-emerald-100 mb-6 max-w-2xl mx-auto">
-            Parents across USA, UK, Australia, and Europe trust us with their children's Quran education.
-          </p>
-          <div className="flex flex-wrap justify-center gap-8">
-            <div>
-              <div className="text-3xl font-bold">4.9/5</div>
-              <div className="text-sm text-emerald-100">Parent Rating</div>
-            </div>
-            <div className="w-px bg-emerald-400/30 hidden sm:block" />
-            <div>
-              <div className="text-3xl font-bold">50+</div>
-              <div className="text-sm text-emerald-100">Countries</div>
-            </div>
-            <div className="w-px bg-emerald-400/30 hidden sm:block" />
-            <div>
-              <div className="text-3xl font-bold">100%</div>
-              <div className="text-sm text-emerald-100">Money-Back Guarantee</div>
-            </div>
-            <div className="w-px bg-emerald-400/30 hidden sm:block" />
-            <div>
-              <div className="text-3xl font-bold">24/7</div>
-              <div className="text-sm text-emerald-100">Support Available</div>
-            </div>
-          </div>
         </div>
       </div>
     </section>

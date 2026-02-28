@@ -49,6 +49,11 @@ import { StudentLayout } from "./components/layout/StudentLayout";
 import Landing from "./pages/Landing";
 import VerifyCertificate from "./pages/public/VerifyCertificate";
 import HolyQuran from "./pages/public/HolyQuran";
+import Programs from "./pages/public/Programs";
+import AboutUs from "./pages/public/AboutUs";
+import Testimonials from "./pages/public/Testimonials";
+import Pricing from "./pages/public/Pricing";
+import Contact from "./pages/public/Contact";
 
 // Main Pages (Teacher)
 import Dashboard from "./pages/Dashboard";
@@ -111,6 +116,9 @@ import NotFound from "./pages/NotFound";
 import Onboarding from "./pages/Onboarding";
 import { MaintenanceOverlay } from "./components/system/MaintenanceOverlay";
 
+// Clerk Testing Page
+import ClerkTest from "./pages/auth/ClerkTest";
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -142,8 +150,14 @@ const App = () => (
               <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/resend-verification" element={<ResendVerification />} />
               <Route path="/design-system" element={<DesignSystem />} />
+              <Route path="/clerk-test" element={<ClerkTest />} />
               <Route path="/verify-mfa" element={<MFAVerify />} />
-              <Route path="/holy-quran" element={<HolyQuran />} />
+              <Route path="/read-quran" element={<HolyQuran />} />
+              <Route path="/programs" element={<Programs />} />
+              <Route path="/about" element={<AboutUs />} />
+              <Route path="/testimonials" element={<Testimonials />} />
+              <Route path="/pricing" element={<Pricing />} />
+              <Route path="/contact" element={<Contact />} />
 
               {/* Onboarding - Optional Flow */}
               <Route path="/onboarding" element={<Onboarding />} />
