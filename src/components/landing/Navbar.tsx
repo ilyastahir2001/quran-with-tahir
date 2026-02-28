@@ -31,7 +31,7 @@ export function Navbar() {
     <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
       {/* Top Trust Bar - instills immediate security feel */}
       <div className={cn(
-        "bg-emerald-600 text-white/95 py-2 transition-all duration-500 overflow-hidden",
+        "bg-[hsl(var(--islamic-blue-dark))] text-white/95 py-2 transition-all duration-500 overflow-hidden",
         isScrolled ? "h-0 opacity-0" : "h-10 opacity-100"
       )}>
         <div className="container mx-auto px-4 flex justify-between items-center text-[10px] sm:text-xs font-bold tracking-wider uppercase">
@@ -66,7 +66,7 @@ export function Navbar() {
                   className="h-16 md:h-20 w-auto object-contain drop-shadow-lg group-hover:scale-105 transition-transform duration-700 animate-in fade-in zoom-in duration-1000"
                 />
                 {!isScrolled && (
-                  <div className="absolute -inset-2 bg-emerald-500/5 blur-2xl rounded-full -z-10 animate-pulse" />
+                  <div className="absolute -inset-2 bg-gold-primary/10 blur-2xl rounded-full -z-10 animate-pulse" />
                 )}
               </div>
             </Link>
@@ -77,11 +77,11 @@ export function Navbar() {
                 <Link
                   key={link.href}
                   to={link.href}
-                  className="text-sm font-black text-emerald-900/80 hover:text-emerald-700 transition-all duration-300 flex items-center gap-2 group relative"
+                  className="text-sm font-black text-slate-700 hover:text-[hsl(var(--islamic-blue-main))] transition-all duration-300 flex items-center gap-2 group relative"
                 >
                   <span className="relative">
                     {link.label}
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-500 transition-all duration-300 group-hover:w-full" />
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold-accent transition-all duration-300 group-hover:w-full" />
                   </span>
                 </Link>
               ))}
@@ -93,19 +93,19 @@ export function Navbar() {
                 href="tel:+923110267879"
                 className={cn(
                   "flex items-center gap-2 text-sm transition-all duration-300 font-extrabold group",
-                  isScrolled ? "text-slate-500 hover:text-emerald-700" : "text-emerald-900/60 hover:text-emerald-700"
+                  isScrolled ? "text-slate-500 hover:text-[hsl(var(--islamic-blue-main))]" : "text-slate-600 hover:text-[hsl(var(--islamic-blue-main))]"
                 )}
               >
-                <div className="w-8 h-8 rounded-full bg-emerald-50 flex items-center justify-center group-hover:bg-emerald-100 transition-colors">
-                  <Phone className="w-4 h-4 text-emerald-600" />
+                <div className="w-8 h-8 rounded-full bg-gold-primary/10 flex items-center justify-center group-hover:bg-gold-primary/20 transition-colors">
+                  <Phone className="w-4 h-4 text-gold-primary" />
                 </div>
                 <span>+92 311 026 7879</span>
               </a>
 
               <Link to="/login">
                 <Button variant="ghost" className={cn(
-                  "font-black px-6 hover:bg-emerald-50 transition-all",
-                  isScrolled ? "text-slate-700" : "text-emerald-900"
+                  "font-black px-6 hover:bg-blue-50 transition-all",
+                  isScrolled ? "text-slate-700" : "text-slate-800"
                 )}>
                   Login
                 </Button>
@@ -113,7 +113,7 @@ export function Navbar() {
 
               <Link to="/contact">
                 <Button
-                  className="bg-emerald-600 hover:bg-emerald-700 text-white shadow-[0_4px_14px_0_rgba(16,185,129,0.39)] font-black px-8 h-12 rounded-xl transition-all hover:-translate-y-1 active:scale-95 border-b-4 border-emerald-800"
+                  className="bg-[hsl(var(--islamic-blue-main))] hover:bg-[hsl(var(--islamic-blue-dark))] text-white shadow-[0_4px_14px_0_rgba(30,64,175,0.35)] font-black px-8 h-12 rounded-xl transition-all hover:-translate-y-1 active:scale-95 border-b-4 border-[hsl(var(--islamic-blue-dark))]"
                 >
                   Free Trial Class
                 </Button>
@@ -125,7 +125,7 @@ export function Navbar() {
               onClick={() => setIsOpen(!isOpen)}
               className={cn(
                 "lg:hidden p-3 rounded-xl transition-all duration-300",
-                isScrolled ? "bg-slate-50 text-slate-800" : "bg-white/50 backdrop-blur-md text-emerald-900"
+                isScrolled ? "bg-slate-50 text-slate-800" : "bg-white/50 backdrop-blur-md text-slate-800"
               )}
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -134,13 +134,13 @@ export function Navbar() {
 
           {/* Mobile Menu */}
           {isOpen && (
-            <div className="lg:hidden py-6 bg-white border border-emerald-50 shadow-2xl rounded-3xl mt-2 animate-in slide-in-from-top zoom-in-95 duration-500">
+            <div className="lg:hidden py-6 bg-white border border-slate-100 shadow-2xl rounded-3xl mt-2 animate-in slide-in-from-top zoom-in-95 duration-500">
               <div className="flex flex-col gap-2 px-6">
                 {navLinks.map((link) => (
                   <Link
                     key={link.href}
                     to={link.href}
-                    className="py-4 text-lg font-black text-emerald-700 hover:text-emerald-800 flex items-center gap-3 active:scale-95 transition-all border-b border-slate-50"
+                    className="py-4 text-lg font-black text-[hsl(var(--islamic-blue-dark))] hover:text-[hsl(var(--islamic-blue-main))] flex items-center gap-3 active:scale-95 transition-all border-b border-slate-50"
                     onClick={() => setIsOpen(false)}
                   >
                     {link.label === 'Read Quran' && <BookOpen className="w-6 h-6" />}
@@ -153,7 +153,7 @@ export function Navbar() {
                     href="tel:+923110267879"
                     className="flex lg:hidden items-center gap-3 bg-slate-50 p-4 rounded-2xl text-slate-600 font-bold"
                   >
-                    <Phone className="w-5 h-5 text-emerald-600" />
+                    <Phone className="w-5 h-5 text-gold-primary" />
                     <span>Inquiry: +92 311 026 7879</span>
                   </a>
 
@@ -165,7 +165,7 @@ export function Navbar() {
                     </Link>
                     <Link to="/contact" onClick={() => setIsOpen(false)}>
                       <Button
-                        className="w-full h-14 bg-emerald-600 hover:bg-emerald-700 text-white font-black rounded-2xl shadow-lg"
+                        className="w-full h-14 bg-[hsl(var(--islamic-blue-main))] hover:bg-[hsl(var(--islamic-blue-dark))] text-white font-black rounded-2xl shadow-lg"
                       >
                         Free Trial
                       </Button>

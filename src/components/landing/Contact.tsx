@@ -61,17 +61,17 @@ export function Contact() {
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <Badge className="bg-emerald-100 text-emerald-700 hover:bg-emerald-100 mb-4">
+          <Badge className="bg-gold-primary/10 text-gold-accent hover:bg-gold-primary/20 mb-4">
             Get Started
           </Badge>
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
             Book Your{' '}
-            <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[hsl(var(--islamic-blue-main))] to-gold-accent bg-clip-text text-transparent">
               Free Trial Class
             </span>
           </h2>
           <p className="text-lg text-muted-foreground">
-            Fill out the form below and our team will contact you within 24 hours 
+            Fill out the form below and our team will contact you within 24 hours
             to schedule your child's free trial class.
           </p>
         </div>
@@ -87,7 +87,7 @@ export function Contact() {
                   </div>
                   <h3 className="text-2xl font-bold mb-2">Thank You!</h3>
                   <p className="text-muted-foreground mb-6">
-                    We've received your request. Our team will contact you within 24 hours 
+                    We've received your request. Our team will contact you within 24 hours
                     to schedule your free trial class.
                   </p>
                   <Button onClick={() => setSubmitted(false)} variant="outline">
@@ -183,7 +183,7 @@ export function Contact() {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white py-6 text-lg"
+                    className="w-full bg-[hsl(var(--islamic-blue-main))] hover:bg-[hsl(var(--islamic-blue-dark))] text-white py-6 text-lg"
                   >
                     {isSubmitting ? (
                       'Submitting...'
@@ -207,8 +207,8 @@ export function Contact() {
                   key={info.title}
                   className="flex items-start gap-4 p-4 bg-muted/50 rounded-xl"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center flex-shrink-0">
-                    <info.icon className="w-6 h-6 text-emerald-600" />
+                  <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center flex-shrink-0">
+                    <info.icon className="w-6 h-6 text-[hsl(var(--islamic-blue-main))]" />
                   </div>
                   <div className="flex-1">
                     <h3 className="font-semibold">{info.title}</h3>
@@ -218,7 +218,7 @@ export function Contact() {
                         href={info.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm text-emerald-600 hover:text-emerald-700 font-medium mt-1 inline-flex items-center gap-1"
+                        className="text-sm text-[hsl(var(--islamic-blue-main))] hover:text-[hsl(var(--islamic-blue-dark))] font-medium mt-1 inline-flex items-center gap-1"
                       >
                         {info.action} →
                       </a>
@@ -229,7 +229,7 @@ export function Contact() {
             </div>
 
             {/* WhatsApp CTA */}
-            <div className="p-6 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl border border-emerald-100">
+            <div className="p-6 bg-gradient-to-br from-blue-50 to-slate-50 rounded-2xl border border-blue-100">
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-14 h-14 rounded-full bg-green-500 flex items-center justify-center">
                   <MessageCircle className="w-7 h-7 text-white" />

@@ -41,13 +41,13 @@ export function Testimonials() {
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-4xl mx-auto mb-20">
-          <Badge className="bg-emerald-100 text-emerald-800 border-none mb-4 px-6 py-2 font-black uppercase tracking-widest text-[10px]">
+          <Badge className="bg-gold-primary/10 text-gold-accent border-none mb-4 px-6 py-2 font-black uppercase tracking-widest text-[10px]">
             Success Stories
           </Badge>
-          <h2 className="text-4xl lg:text-6xl font-black text-emerald-950 mb-6 tracking-tight">
-            Loved By Families <span className="text-emerald-600">Worldwide</span>
+          <h2 className="text-4xl lg:text-6xl font-black text-[hsl(var(--islamic-blue-dark))] mb-6 tracking-tight">
+            Loved By Families <span className="text-gold-accent">Worldwide</span>
           </h2>
-          <p className="text-xl text-stone-600 font-bold max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl text-slate-600 font-bold max-w-2xl mx-auto leading-relaxed">
             Join thousands of satisfied students who have transformed their relationship with the Quran.
           </p>
         </div>
@@ -63,12 +63,12 @@ export function Testimonials() {
               transition={{ delay: idx * 0.2 }}
             >
               <Card className="h-full border-0 shadow-lg bg-white relative overflow-hidden group hover:-translate-y-2 transition-transform duration-300">
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 to-emerald-600" />
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-gold-primary to-gold-accent" />
                 <CardContent className="p-8 pt-10 flex flex-col h-full relative">
                   <QuoteIcon className="absolute top-6 right-6 w-10 h-10 text-emerald-50 pointer-events-none group-hover:text-emerald-100 transition-colors" />
 
                   <div className="flex items-center gap-4 mb-6">
-                    <div className="w-14 h-14 rounded-full border-2 border-emerald-100 p-1 flex-shrink-0">
+                    <div className="w-14 h-14 rounded-full border-2 border-gold-primary/20 p-1 flex-shrink-0">
                       <img
                         src={testimonial.image}
                         alt={testimonial.name}
@@ -94,7 +94,7 @@ export function Testimonials() {
                   </p>
 
                   <div className="pt-6 border-t border-slate-50">
-                    <div className="text-xs font-black uppercase tracking-wider text-emerald-600">
+                    <div className="text-xs font-black uppercase tracking-wider text-[hsl(var(--islamic-blue-main))]">
                       {testimonial.role}
                     </div>
                   </div>
@@ -111,11 +111,11 @@ export function Testimonials() {
             <p className="text-stone-500 text-sm font-bold">Read verified reviews on our social platforms.</p>
           </div>
 
-          <div className="flex items-center gap-4 bg-emerald-50 px-6 py-3 rounded-xl border border-emerald-100">
-            <ShieldCheck className="w-6 h-6 text-emerald-600" />
+          <div className="flex items-center gap-4 bg-blue-50 px-6 py-3 rounded-xl border border-blue-100">
+            <ShieldCheck className="w-6 h-6 text-[hsl(var(--islamic-blue-main))]" />
             <div className="flex flex-col">
-              <span className="text-xs font-bold text-emerald-800 uppercase tracking-wider">Top Rated On</span>
-              <span className="text-lg font-black text-emerald-900 leading-none">TrustPilot</span>
+              <span className="text-xs font-bold text-[hsl(var(--islamic-blue-dark))] uppercase tracking-wider">Top Rated On</span>
+              <span className="text-lg font-black text-[hsl(var(--islamic-blue-dark))] leading-none">TrustPilot</span>
             </div>
             <div className="flex items-center gap-0.5 ml-2 text-gold-accent">
               <StarIcon className="w-4 h-4 fill-current" />
